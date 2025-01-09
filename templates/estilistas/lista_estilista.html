@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Registro estilista{% endblock title %}
+    
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Lista estilista</h2>
+
+    <div class="d-flex justify-content-center">
+        <table class="table table-dark table-hover mt-5" style="width: 75%;">
+            <thead>
+                <tr>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for estilista in estilistas %}
+                <tr>
+                    <th scope="row">{{ estilista.dni }}</th>
+                    <td>{{ estilista.nombre }}</td>
+                    <td>{{ estilista.apellido }}</td>
+                    <td>{{ estilista.telefono }}</td>
+                    <td>{{ estilista.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

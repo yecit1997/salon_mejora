@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Registro estilista{% endblock title %}
+    
+{% block content %}
+<h2>Registro de estilista</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5 mb-5">
+                <div class="card-body">
+                    <form method="POST" class="my-class">
+                        {% csrf_token %}
+                        {{estilista_form|crispy}}
+                        <button type="submit" class="btn btn-primary d-block w-100">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+    
+    
