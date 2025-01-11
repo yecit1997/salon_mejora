@@ -7,6 +7,7 @@ class Estilista(models.Model):
     apellido = models.CharField(max_length=50)
     telefono = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True, blank=False, null=False)
+    deshabilitado = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
     
