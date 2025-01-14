@@ -52,9 +52,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # APPS que creamos en el proyecto
 LOCAL_APPS = [
     "estilista",
-    # 'cliente',
-    # 'servicio',
-    # 'cita',
+    'cliente',
+    'servicios',
+    'cita',
     # 'pago',
     # 'producto',
     # 'venta',

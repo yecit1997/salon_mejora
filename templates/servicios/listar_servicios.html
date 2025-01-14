@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Lista citas{% endblock title %}
+    
+{% block content %}
+<h2>Lista de citas</h2>
+
+
+<div class="d-flex justify-content-center">
+    <table class="table table-dark table-hover mt-5" style="width: 75%;">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="estilistaTable">
+            {% for servicio in servicios %}
+            <tr>
+                <th scope="row">{{ servicio.nombre }}</th>
+                <td>{{ servicio.descripcion }}</td>
+                <td>{{ servicio.precio }}</td>
+                <td>
+                    <a href="" class="btn btn-link text-info">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+
+                    <a href="" class="btn btn-link text-info">
+                        <i class="bi bi-eye-fill"></i>
+                    </a>
+                    
+                    <a href="" class="btn btn-link text-danger" 
+                    onclick="return confirm('¿Estás seguro de eliminar el estilista?');">
+                        <i class="bi bi-trash-fill"></i> 
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% endblock content %}
+    
+    

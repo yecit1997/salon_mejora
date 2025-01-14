@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Inicio de seccion{% endblock title %}
+
+{% block styles %}
+<style>
+    body {
+        /* background-image: url("{% static 'img/imagenes_fondo/peluqueria.jpg' %}");
+        background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+         /*background-repeat: no-repeat; /* Evita que la imagen se repita */
+         /*background-attachment: fixed; /* Hace que la imagen de fondo se mantenga fija cuando se desplaza la página */
+         /*background-position: center;*/
+    }
+
+    form .form-control {
+        width: 100%;
+    }
+    
+    form label {
+        display: none;
+    }
+    
+</style>
+{% endblock styles %}
+
+{% block content %}
+<h2>Inicio</h2>
+
+
+
+
+<div class="container mt-5">
+    <h2 class="text-center">Inicio de seccion</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5 mb-5">
+                <div class="card-body">
+                    <form method="POST" class="my-class">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <button type="submit" class="btn btn-primary d-block w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

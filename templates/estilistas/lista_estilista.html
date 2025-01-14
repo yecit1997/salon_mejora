@@ -41,10 +41,10 @@
                 {% for estilista in estilistas %}
                 <tr>
                     <th scope="row">{{ estilista.dni }}</th>
-                    <td>{{ estilista.nombre }}</td>
-                    <td>{{ estilista.apellido }}</td>
+                    <td>{{ estilista.user.last_name }}</td>
+                    <td>{{ estilista.user.first_name }}</td>
                     <td>{{ estilista.telefono }}</td>
-                    <td>{{ estilista.email }}</td>
+                    <td>{{ estilista.user.email }}</td>
                     <td>
                         <a href="{% url 'editar-estilista' estilista.dni %}" class="btn btn-link text-info">
                             <i class="bi bi-pencil"></i>

@@ -1,48 +1,66 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login
+from django.contrib.auth.models import User
 from .estilistaForm import EstilistaForm
 from .models import Estilista
 from django.db import models
 
 
-# Crear estilista
+
 def crear_estilista(request):
     if request.method == 'POST':
-        estilista_form = EstilistaForm(request.POST)
-        if estilista_form.is_valid():
-            estilista_form.save()
+        form = EstilistaForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+                email=form.cleaned_data['email'],
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name']
+            )
+            estilista = Estilista.objects.create(
+                user=user,
+                dni=form.cleaned_data['dni'],
+                telefono=form.cleaned_data['telefono']
+            )
+            login(request, user)
             return redirect('lista-estilistas')
     else:
         estilista_form = EstilistaForm()
-        
+    
     context = {
-        'estilista_form':estilista_form
+        'estilista_form': estilista_form
     }
-    return render(request, 'estilistas/create_estilista.html', context=context) 
+    return render(request, 'estilistas/create_estilista.html', context)
+
+
 
 # Listar estilistas
 def lista_estilistas(request):
     estilistas = Estilista.objects.all()
     status = request.GET.get('status', 'all')
+    
     if status == 'active':
-        estilistas = estilistas.filter(deshabilitado=False)
+        estilistas = estilistas.filter(user__is_active=True)
     elif status == 'disabled':
-        estilistas = estilistas.filter(deshabilitado=True)
+        estilistas = estilistas.filter(user__is_active=False)
+    
     query = request.GET.get('q')
     if query:
-        estilistas = Estilista.objects.filter(
+        estilistas = estilistas.filter(
             models.Q(dni__icontains=query) |
-            models.Q(nombre__icontains=query) |
-            models.Q(apellido__icontains=query) |
+            models.Q(user__first_name__icontains=query) |
+            models.Q(user__last_name__icontains=query) |
             models.Q(telefono__icontains=query) |
-            models.Q(email__icontains=query)
+            models.Q(user__email__icontains=query)
         )
 
-    # estilistas = Estilista.objects.filter(deshabilitado=False)
     context = {
-        'estilistas':estilistas,
+        'estilistas': estilistas,
         'status': status
     }
     return render(request, 'estilistas/lista_estilista.html', context=context)
+
 
 
 # Editar estilista

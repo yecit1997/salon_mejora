@@ -6,6 +6,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
+
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Estilistas</a>
                   <ul class="dropdown-menu">
@@ -13,18 +14,41 @@
                       <li><a class="dropdown-item" href="{% url 'lista-estilistas' %}">Listar</a></li>
                   </ul>
               </li>
-              <a class="nav-link active" aria-current="page" href="#">Estilistas</a>
-              <a class="nav-link" href="#">Servicios</a>
-              <a class="nav-link" href="#">Clientes</a>
-              <a class="nav-link disabled">Citas</a>
+
+              {% comment %} <a class="nav-link active" aria-current="page" href="#">Estilistas</a>
+              <a class="nav-link" href="#">Servicios</a> {% endcomment %}
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Servicios</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href=" {% url 'crear-servicios' %} ">Crear</a></li>
+                    <li><a class="dropdown-item" href=" {% url 'lista-servicios' %} ">Listar</a></li>
+                </ul>
+             </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Clientes</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'registro-cliente' %}">Crear</a></li>
+                    <li><a class="dropdown-item" href=" {% url 'listar-cliente' %} ">Listar</a></li>
+                </ul>
+             </li>
+
+             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Citas</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href=" {% url 'crear-cita' %} ">Crear</a></li>
+                    <li><a class="dropdown-item" href=" {% url 'listar-citas' %} ">Listar</a></li>
+                </ul>
+             </li>
+              
+
           </div>
           <div class="navbar-nav ms-auto">
-              
               <span class="navbar-text">Hola, Usaurio!</span>
               <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a>
-             
               <a class="nav-link" href="#">Login</a>
-              
+              <a class="nav-link" href="#">Register</a>
           </div>
       </div>
   </div>
