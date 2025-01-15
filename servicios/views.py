@@ -5,7 +5,13 @@ from .serviciosForm import servicioForm
 
 # Crear servicios
 def crear_servicios(request):
-    form = servicioForm()
+    if request.method == 'POST':
+        form = servicioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista-servicios')
+    else:
+        form = servicioForm()
     
     context = {
         'form': form

@@ -55,7 +55,7 @@ LOCAL_APPS = [
     'cliente',
     'servicios',
     'cita',
-    # 'pago',
+    'usuarios',
     # 'producto',
     # 'venta',
     # 'venta_producto'

@@ -3,49 +3,71 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block title %}Lista citas{% endblock title %}
-    
+{% block title %}Lista de Citas{% endblock title %}
+
+{% block styles %}
+<style>
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .btn-custom {
+        border-radius: 20px;
+        margin-top: 5px;
+    }
+
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    @media (max-width: 767px) {
+        .card-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock styles %}
+
 {% block content %}
-<h2>Lista de citas</h2>
+<h2 class="text-center my-4">Lista de Citas</h2>
 
-
-<div class="d-flex justify-content-center">
-    <table class="table table-dark table-hover mt-5" style="width: 75%;">
-        <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="estilistaTable">
-            {% for servicio in servicios %}
-            <tr>
-                <th scope="row">{{ servicio.nombre }}</th>
-                <td>{{ servicio.descripcion }}</td>
-                <td>{{ servicio.precio }}</td>
-                <td>
-                    <a href="" class="btn btn-link text-info">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-
-                    <a href="" class="btn btn-link text-info">
-                        <i class="bi bi-eye-fill"></i>
-                    </a>
-                    
-                    <a href="" class="btn btn-link text-danger" 
-                    onclick="return confirm('¿Estás seguro de eliminar el estilista?');">
-                        <i class="bi bi-trash-fill"></i> 
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container mb-5">
+    <div class="card-container">
+        {% for servicio in servicios %}
+        <div class="card">
+            <img src="{% static 'img/motor.jpeg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ servicio.nombre }}</h5>
+                <p class="card-text">{{ servicio.descripcion|truncatewords:10 }}</p>
+                <h6 class="card-text">Precio: ${{ servicio.precio }}</h6>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <a class="btn btn-sm btn-secondary btn-custom" href="#" role="button">Detalle</a>
+                <a class="btn btn-sm btn-dark btn-custom" href="#" role="button">Editar</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay productos disponibles.</p>
+        {% endfor %}
+    </div>
 </div>
-</div>
-
 {% endblock content %}
-    
-    

@@ -7,11 +7,28 @@
 {% block styles %}
 <style>
     body {
-        /* background-image: url("{% static 'img/imagenes_fondo/peluqueria.jpg' %}");
-        background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
-         /*background-repeat: no-repeat; /* Evita que la imagen se repita */
-         /*background-attachment: fixed; /* Hace que la imagen de fondo se mantenga fija cuando se desplaza la página */
-         /*background-position: center;*/
+        background-image: url("{% static 'img/imagenes_fondo/peluqueria.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        color: #fff;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+        color: #fff;
+    }
+
+    .navbar-text {
+        color: #fff;
     }
 
     form .form-control {
@@ -22,29 +39,66 @@
         display: none;
     }
     
+    .card {
+        background-color: rgba(255, 255, 255, 0.9); /* Fondo de la tarjeta semi-transparente */
+        border-radius: 15px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 20px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .badge {
+        background-color: #007bff;
+        border-radius: 20px;
+    }
+
+    .badge:hover {
+        background-color: #0056b3;
+    }
+    
 </style>
 {% endblock styles %}
 
+
 {% block content %}
-<h2>Inicio</h2>
 
 
-
-
-<div class="container mt-5">
-    <h2 class="text-center">Inicio de seccion</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card mt-5 mb-5">
-                <div class="card-body">
-                    <form method="POST" class="my-class">
-                        {% csrf_token %}
-                        {{form|crispy}}
-                        <button type="submit" class="btn btn-primary d-block w-100">Login</button>
-                    </form>
-                </div>
-            </div>
+<div class="container">
+    <div class="col-4 offset-4 mb-5 overlay">
+        <div class="card" style="width: 100%;">
+          <img src="{% static 'img/imagenes_fondo/peluqueria1.jpg' %}" class="card-img-top" alt="Peluquería" width="100" height="200">
+          <div class="card-body">
+              <form method="POST" class="my-class">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                      <input class="form-control" type="text" name="username" placeholder="Email">
+                  </div>
+                  <div class="mb-3">
+                      <input class="form-control" type="password" name="password" placeholder="Password">
+                  </div>
+                  <div class="mb-3">
+                      <select class="form-control" name="rol">
+                        <option>Rol</option>
+                        <option value="cliente">Cliente</option>
+                        <option value="estilista">Estilista</option>
+                      </select>
+                  </div>
+                  <input type="hidden" name="next" value="{{ next }}">
+                  <div class="d-grid gap-2">
+                      <button type="submit" class="btn btn-primary">Login</button>
+                      <a href=" {% url 'registro-cliente' %} " class="btn btn-outline-primary">Registrarse</a>
+                  </div>
+              </form>
+          </div>
         </div>
     </div>
 </div>
 {% endblock content %}
+

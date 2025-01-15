@@ -2,12 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 # Create your models here.
 class Estilista(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dni = models.CharField(max_length=10, unique=True, primary_key=True)
     telefono = models.CharField(max_length=20, unique=True)
-    rol = models.CharField(max_length=20, default='estilista')
+    rol = models.CharField(max_length=30, default='estilista')  # Nota el uso de 'related_name'
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
