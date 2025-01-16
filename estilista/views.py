@@ -6,7 +6,7 @@ from .models import Estilista
 from django.db import models
 
 
-
+# Crear estilista
 def crear_estilista(request):
     if request.method == 'POST':
         form = EstilistaForm(request.POST)
@@ -32,7 +32,6 @@ def crear_estilista(request):
         'estilista_form': estilista_form
     }
     return render(request, 'estilistas/create_estilista.html', context)
-
 
 
 # Listar estilistas
@@ -62,20 +61,35 @@ def lista_estilistas(request):
     return render(request, 'estilistas/lista_estilista.html', context=context)
 
 
-
 # Editar estilista
 def editar_estilista(request, dni):
-    estilista: str = get_object_or_404(Estilista, dni=dni)
+    
+    estilista = get_object_or_404(Estilista, dni=dni)
     if request.method == 'GET':
-        estilista_form = EstilistaForm(instance=estilista)
+        estilista_form = EstilistaForm(instance=estilista, initial={
+            'username': estilista.user.username,
+            'email': estilista.user.email,
+            'first_name': estilista.user.first_name,
+            'last_name': estilista.user.last_name,
+        })
     else:
         estilista_form = EstilistaForm(request.POST, instance=estilista)
         if estilista_form.is_valid():
+            # Actualizar el usuario asociado
+            user = estilista.user
+            user.username = estilista_form.cleaned_data['username']
+            user.email = estilista_form.cleaned_data['email']
+            user.first_name = estilista_form.cleaned_data['first_name']
+            user.last_name = estilista_form.cleaned_data['last_name']
+            user.save()
+
+            # Guardar el estilista
             estilista_form.save()
-        return redirect('lista-estilistas')
+
+            return redirect('lista-estilistas')
     
     context = {
-        'estilista_form':estilista_form
+        'estilista_form': estilista_form
     }
     return render(request, 'estilistas/editar_estilista.html', context=context)
 

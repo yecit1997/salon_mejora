@@ -1,13 +1,9 @@
 {% extends 'core/base.html' %}
-
 {% load crispy_forms_tags %}
 {% load static %}
-
 {% block title %}Registro estilista{% endblock title %}
-    
 {% block content %}
-<h2>Registro de estilista</h2>
-
+<h2>Lista de clientes</h2>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -15,10 +11,10 @@
                 <div class="card-body">
                     <form method="POST" class="my-class">
                         {% csrf_token %}
-                        {{estilista_form|crispy}}
+                        {{ form|crispy }}
                         <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
                             <button type="submit" class="btn btn-primary" style="width: 45%;">Editar</button>
-                            <a class="btn btn-sm btn-secondary btn-custom" href="{% url 'lista-estilistas' %}" role="button" style="width: 45%;">Volver</a>
+                            <a class="btn btn-sm btn-secondary btn-custom" href="{% url 'listar-cliente' %}" role="button" style="width: 45%;">Volver</a>
                         </div>
                     </form>
                 </div>
@@ -26,7 +22,4 @@
         </div>
     </div>
 </div>
-
 {% endblock content %}
-    
-    

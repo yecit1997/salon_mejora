@@ -2,13 +2,13 @@
 
 {% load static %}
 
-{% block title %}Detalle Estilista{% endblock title %}
+{% block title %}Detalle Cliente{% endblock title %}
 
 {% block content %}
 <div class="container mt-5 d-flex justify-content-center">
     <div class="card" style="width: 50%;">
         <div class="card-header text-center">
-            <h2>Detalle del Estilista</h2>
+            <h2>Detalle del Cliente</h2>
         </div>
         <div class="card-body">
             <div class="row mb-3">
@@ -16,7 +16,7 @@
                     <strong>DNI:</strong>
                 </div>
                 <div class="col-md-8">
-                    {{ estilista.dni }}
+                    {{ cliente.dni }}
                 </div>
             </div>
             <div class="row mb-3">
@@ -24,7 +24,7 @@
                     <strong>Nombre:</strong>
                 </div>
                 <div class="col-md-8">
-                    {{ estilista.user.first_name }}
+                    {{ cliente.user.first_name }}
                 </div>
             </div>
             <div class="row mb-3">
@@ -32,7 +32,7 @@
                     <strong>Apellido:</strong>
                 </div>
                 <div class="col-md-8">
-                    {{ estilista.user.last_name }}
+                    {{ cliente.user.last_name }}
                 </div>
             </div>
             <div class="row mb-3">
@@ -40,7 +40,7 @@
                     <strong>Teléfono:</strong>
                 </div>
                 <div class="col-md-8">
-                    {{ estilista.telefono }}
+                    {{ cliente.telefono }}
                 </div>
             </div>
             <div class="row mb-3">
@@ -48,7 +48,7 @@
                     <strong>Correo:</strong>
                 </div>
                 <div class="col-md-8">
-                    {{ estilista.user.email }}
+                    {{ cliente.user.email }}
                 </div>
             </div>
             <div class="row mb-3">
@@ -56,7 +56,7 @@
                     <strong>Usuario:</strong>
                 </div>
                 <div class="col-md-8">
-                    {{ estilista.user.username }}
+                    {{ cliente.user.username }}
                 </div>
             </div>
             <div class="row mb-3">
@@ -64,12 +64,13 @@
                     <strong>Rol:</strong>
                 </div>
                 <div class="col-md-8">
-                    {{ estilista.rol }}
+                    {{ cliente.rol }}
                 </div>
             </div>
+            
             <div class="row mt-4">
                 <div class="col text-center">
-                    <a href="{% url 'lista-estilistas' %}" class="btn btn-primary">Regresar a la Lista</a>
+                    <a href="{% url 'listar-cliente' %}" class="btn btn-primary">Regresar a la Lista</a>
                 </div>
             </div>
         </div>

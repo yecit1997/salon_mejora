@@ -5,65 +5,7 @@
 {% block title %}Inicio de seccion{% endblock title %}
 
 {% block styles %}
-<style>
-    body {
-        background-image: url("{% static 'img/imagenes_fondo/peluqueria.jpg' %}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        color: #fff;
-    }
-
-    .overlay {
-        background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
-        padding: 20px;
-        border-radius: 10px;
-    }
-
-    h2 {
-        text-align: center;
-        margin-top: 20px;
-        color: #fff;
-    }
-
-    .navbar-text {
-        color: #fff;
-    }
-
-    form .form-control {
-        width: 100%;
-    }
-    
-    form label {
-        display: none;
-    }
-    
-    .card {
-        background-color: rgba(255, 255, 255, 0.9); /* Fondo de la tarjeta semi-transparente */
-        border-radius: 15px;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-        border-radius: 20px;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-
-    .badge {
-        background-color: #007bff;
-        border-radius: 20px;
-    }
-
-    .badge:hover {
-        background-color: #0056b3;
-    }
-    
-</style>
+    <link href=" {% static 'css/inicio_seccion.css' %} " rel="stylesheet">
 {% endblock styles %}
 
 
@@ -83,13 +25,7 @@
                   <div class="mb-3">
                       <input class="form-control" type="password" name="password" placeholder="Password">
                   </div>
-                  <div class="mb-3">
-                      <select class="form-control" name="rol">
-                        <option>Rol</option>
-                        <option value="cliente">Cliente</option>
-                        <option value="estilista">Estilista</option>
-                      </select>
-                  </div>
+                  
                   <input type="hidden" name="next" value="{{ next }}">
                   <div class="d-grid gap-2">
                       <button type="submit" class="btn btn-primary">Login</button>
