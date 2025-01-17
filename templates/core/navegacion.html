@@ -30,16 +30,19 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Citas</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'crear-cita' %}">Crear</a></li>
+                        {% comment %} <li><a class="dropdown-item" href="{% url 'crear-cita' servicio.id %}">Crear</a></li> {% endcomment %}
                         <li><a class="dropdown-item" href="{% url 'listar-citas' %}">Listar</a></li>
                     </ul>
                 </li>
             </div>
             <div class="navbar-nav ms-auto">
-                <span class="navbar-text">Hola, Usuario!</span>
-                <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a>
-                <a class="nav-link" href=" {% url 'inicio-seccion' %} ">Login</a>
-                <a class="nav-link" href=" {% url 'registro-cliente' %} ">Register</a>
+                {% if user.is_authenticated %}
+                    <span class="navbar-text">Hola, {{ user.first_name }}</span>
+                    <a class="nav-link" href="  "><i class="bi bi-box-arrow-right"></i> </a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'inicio-seccion' %}">Login</a>
+                    <a class="nav-link" href="{% url 'registro-cliente' %}">Register</a>
+                {% endif %}
             </div>
         </div>
     </div>

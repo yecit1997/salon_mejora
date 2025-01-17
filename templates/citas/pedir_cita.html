@@ -13,8 +13,13 @@
             <div class="card mt-5 mb-5">
                 <div class="card-body">
                     <form method="POST" class="my-class">
+                        <h4>Servicio seleccionado:</h4> 
+                        <p><strong>Nombre:</strong> {{ servicio.nombre }}</p> 
+                        <p><strong>Descripción:</strong> {{ servicio.descripcion }}</p> 
+                        <p><strong>Precio:</strong> ${{ servicio.precio }}</p>
                         {% csrf_token %}
                         {{form|crispy}}
+                        <input type="hidden" name="servicio" value="{{ servicio.id }}">
                         <button type="submit" class="btn btn-primary d-block w-100">Registrar</button>
                     </form>
                 </div>
