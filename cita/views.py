@@ -31,22 +31,22 @@ def crear_cita(request, id):
     return render(request, 'citas/pedir_cita.html', context=context)
     
 
-
 # Listamos las citas que tenemos en el sistema
 def listar_citas(request):
     citas = Cita.objects.all()
     
     context = {
         'citas': citas
-        
     }
     
     return render(request, 'citas/listar_cita.html', context=context)
 
 
-# Editar una cita
+# Editar una cita // Solo para el administrador y clientes
 def editar_cita(request, id):
     cita = get_object_or_404(Cita, id=id)
+    servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
+
     if request.method == 'POST':
         form = citaForm(request.POST, instance=cita)
         if form.is_valid():
@@ -56,9 +56,15 @@ def editar_cita(request, id):
         form = citaForm(instance=cita)
         
     context = {
-        'form': form
+        'form': form,
+        'servicio':servicio
     }
     
     return render(request, 'citas/editar_cita.html', context=context)
 
 
+# Eliminar Citas // Solo para el administrador y clientes
+def eliminar_cita(request, id):
+    cita = get_object_or_404(Cita, id=id)
+    cita.delete()
+    return redirect('listar-citas')
