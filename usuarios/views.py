@@ -11,12 +11,20 @@ def inicio_seccion(request):
             user = authenticate(username=usuario, password=clave)
             if user is not None:
                 login(request, user)
-                return redirect('lista-estilistas')
+                return redirect('lista-servicios')
             else:
-                return redirect('lista-estilistas')
+                return redirect('lista-servicios')
     
     context = {
         'form': LoginForm()
     }
     return render(request, 'usuarios/inicio_seccion.html', context=context)
 
+
+
+def cerrar_seccion(request):
+    '''
+    Definimos el cierre de la seccion y direccionamos al usuario nuevamente a la pagina de inicio de seccion
+    '''
+    logout(request)
+    return redirect('inicio-seccion')

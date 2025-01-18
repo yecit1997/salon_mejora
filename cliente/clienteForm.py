@@ -11,6 +11,7 @@ class CombinedUserClienteForm(forms.ModelForm):
     last_name = forms.CharField(max_length=30)
     dni = forms.CharField(max_length=10)
     telefono = forms.CharField(max_length=20)
+    # is_active = forms.BooleanField(required=False)
     
 
     class Meta: 

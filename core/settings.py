@@ -92,6 +92,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'estilista.context_processors.rol_usuario',
             ],
         },
     },
@@ -166,10 +167,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AUTH_USER_MODEL = "usuario.Usuario" #Descomentar esta linea para tomar como modelo de autenticacion
 
 # '''Variables de entorno para el inicio de sección y redirección de la pagina'''
-# LOGIN_REDIRECT_URL = 'productos'
-# LOGIN_URL = 'login'
-# LOGOUT_URL = 'logout'
-# LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'lista-servicios'
+LOGIN_URL = 'inicio-seccion'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'inicio-seccion'
 
 
 

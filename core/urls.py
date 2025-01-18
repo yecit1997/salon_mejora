@@ -28,7 +28,7 @@ urlpatterns = [
     path('estilistas/', include('estilista.urls')),
     path('clientes/', include('cliente.urls')),
     path('cita/', include('cita.urls')),
-    path('servicios/', include('servicios.urls')),
+    path('', include('servicios.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
