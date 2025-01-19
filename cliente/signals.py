@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Cliente
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 @receiver(post_migrate)
 def create_permissions(sender, **kwargs):
@@ -15,6 +16,15 @@ def create_permissions(sender, **kwargs):
             name='Puede crear citas',
             content_type=content_type,
         )
+        
+        
+@receiver(post_save, sender=User)
+def asignar_grupo_cliente(sender, instance, created, **kwargs):
+    if created:
+        grupo_cliente = Group.objects.get(name='cliente')
+        grupo_cliente.user_set.add(instance)
+
+
 
 @receiver(post_save, sender=User)
 def asignar_permisos_cliente(sender, instance, created, **kwargs):
@@ -22,7 +32,6 @@ def asignar_permisos_cliente(sender, instance, created, **kwargs):
         content_type = ContentType.objects.get_for_model(Cliente)
         puede_citar_perm = Permission.objects.get(codename='puede_citar_cliente', content_type=content_type)
         instance.user_permissions.add(puede_citar_perm)
-
 
 
 
