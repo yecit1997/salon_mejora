@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import Permission 
+from django.contrib.contenttypes.models import ContentType
+
 
 
 class Cliente(models.Model):
@@ -10,10 +13,16 @@ class Cliente(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
     
+    
     class Meta:
         verbose_name = "cliente"
         verbose_name_plural = "clientes"
         ordering = ["-fecha_creacion"]
+        # permissions = (
+        #     ('puede_citar', 'Puede crear citas'), # Definimos un permiso personalizado
+        # )
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
+
+

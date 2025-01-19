@@ -16,6 +16,9 @@ class Estilista(models.Model):
         verbose_name = "estilista"
         verbose_name_plural = "estilistas"
         ordering = ["-fecha_creacion"]
+        permissions = (
+            ('puede_ver_listas', 'Puede ver las listas'), # Definimos un permiso personalizado
+        )
         
         
     def __str__(self):

@@ -1,12 +1,24 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
 from django.contrib.auth.models import User
 from .models import Cliente
 from .clienteForm import CombinedUserClienteForm
+from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Registrar clientes
+
+# @permission_required('auth.is_superuser', raise_exception=False, login_url='')
 def registro_cliente(request):
+    print(request)
+    # if not request.user.is_superuser:
+    #     print('No tienes permisos para acceder a esta página.')
+    #     messages.error(request, "No tienes permisos para acceder a esta página.")
+    #     return redirect('/')
+    
     if request.method == 'POST':
+        print('No tienes permisos para acceder a esta página.')
+        
         form = CombinedUserClienteForm(request.POST)
         if form.is_valid():
             user_data = form.cleaned_data
@@ -36,7 +48,7 @@ def registro_cliente(request):
 # Listar cliente
 def listar_clientes(request):
     clientes = Cliente.objects.all()
-    
+        
     context = {
         'clientes': clientes
     }

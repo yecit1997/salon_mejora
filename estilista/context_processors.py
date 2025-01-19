@@ -1,7 +1,7 @@
 from .models import Estilista
 
 
-def rol_usuario(request):
+def rol_estilista(request):
     rol = None
     if request.user.is_authenticated:
         try:

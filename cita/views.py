@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.contrib.auth.decorators import login_required, permission_required
 from cliente.models import Cliente
 from servicios.models import Servicio
 from .models import Cita
@@ -8,6 +8,8 @@ from .citaForm import citaForm
 
 
 # Pedir una cita
+# @login_required(login_url='inicio-sesion')
+@permission_required('cliente.puede_citar_cliente',login_url='inicio-seccion', raise_exception=False)
 def crear_cita(request, id):
     servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
     cliente = get_object_or_404(Cliente, user=request.user) # Obtenemos el cliente que está logueado
@@ -24,14 +26,15 @@ def crear_cita(request, id):
         
     context = {
         'form': form,
-        'servicio':servicio
-        # 'cliente':cliente
+        'servicio':servicio,
+        'cliente':cliente
         }
     
     return render(request, 'citas/pedir_cita.html', context=context)
     
 
 # Listamos las citas que tenemos en el sistema
+@permission_required('Estilista.puede_ver_listas', login_url='inicio-seccion', raise_exception=False)
 def listar_citas(request):
     citas = Cita.objects.all()
     

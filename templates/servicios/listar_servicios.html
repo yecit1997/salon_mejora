@@ -68,11 +68,9 @@
                     Si el usuario no está autenticado, lo redirigimos a la página de inicio de sesión.
                 {% endcomment %}
                 <a class="btn btn-sm btn-dark btn-custom" href=" 
-                {% if user.is_authenticated %}
+                
                     {% url 'crear-cita' servicio.id %}
-                {% else %}
-                    {% url 'inicio-seccion' %}
-                {% endif %}
+                
                      " role="button">Citar</a>
                 <a class="btn btn-sm btn-dark btn-custom" href="#" role="button">Editar</a>
             </div>

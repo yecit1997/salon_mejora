@@ -32,6 +32,14 @@
                 
         </header>
         <main class="container" style="margin-top: 75px;">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             {% block content %} {% endblock content %}
         </main>
         {% include 'core/footer.html' %}

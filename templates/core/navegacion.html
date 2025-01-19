@@ -21,17 +21,18 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-scissors"></i>Estilistas</a>
                         <ul class="dropdown-menu">
                             
-                            {% if user.is_superuser %} 
+                            
                                     <li><a class="dropdown-item" href="{% url 'crear-estilista' %}">Crear</a></li>
-                            {% endif %} 
+                            
                             <li><a class="dropdown-item" href="{% url 'lista-estilistas' %}">Listar</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-person"></i>Clientes</a>
                         <ul class="dropdown-menu">
-            
-                            <li><a class="dropdown-item" href="{% url 'registro-cliente' %}">Crear</a></li>
+                            {% if user.is_superuser %}
+                                <li><a class="dropdown-item" href="{% url 'registro-cliente' %}">Crear</a></li>
+                            {% endif %}
                             <li><a class="dropdown-item" href="{% url 'listar-cliente' %}">Listar</a></li>
                         </ul>
                     </li>
