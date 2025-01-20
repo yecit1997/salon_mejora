@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 
 
@@ -8,7 +9,7 @@ class Estilista(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dni = models.CharField(max_length=10, unique=True, primary_key=True)
     telefono = models.CharField(max_length=20, unique=True)
-    rol = models.CharField(max_length=30, default='estilista')  # Nota el uso de 'related_name'
+    rol = models.CharField(max_length=30, default='estilistas')  # Nota el uso de 'related_name'
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
@@ -16,10 +17,13 @@ class Estilista(models.Model):
         verbose_name = "estilista"
         verbose_name_plural = "estilistas"
         ordering = ["-fecha_creacion"]
-        permissions = (
-            ('puede_ver_listas', 'Puede ver las listas'), # Definimos un permiso personalizado
-        )
         
         
     def __str__(self):
         return f"{self.user.last_name} {self.user.first_name}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.user and self.rol == "estilistas":
+            grupo_estilista = Group.objects.get(name="estilistas")
+            grupo_estilista.user_set.add(self.user)

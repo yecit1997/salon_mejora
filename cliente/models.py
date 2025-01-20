@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth.models import Permission 
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Group
 
 
 
@@ -18,11 +17,16 @@ class Cliente(models.Model):
         verbose_name = "cliente"
         verbose_name_plural = "clientes"
         ordering = ["-fecha_creacion"]
-        # permissions = (
-        #     ('puede_citar', 'Puede crear citas'), # Definimos un permiso personalizado
-        # )
+        
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
+    
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.user and self.rol == "cliente":
+            grupo_estilista = Group.objects.get(name="cliente")
+            grupo_estilista.user_set.add(self.user)
 
 

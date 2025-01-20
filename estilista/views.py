@@ -21,9 +21,10 @@ def crear_estilista(request):
             estilista = Estilista.objects.create(
                 user=user,
                 dni=form.cleaned_data['dni'],
-                telefono=form.cleaned_data['telefono']
+                telefono=form.cleaned_data['telefono'],
+                rol='estilistas'
             )
-            login(request, user)
+            # login(request, user)
             return redirect('lista-estilistas')
     else:
         estilista_form = EstilistaForm()

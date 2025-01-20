@@ -32,7 +32,8 @@ def registro_cliente(request):
             cliente = Cliente.objects.create(
                 user=user,
                 dni=user_data['dni'],
-                telefono=user_data['telefono']
+                telefono=user_data['telefono'],
+                rol = 'cliente'
             )
             return redirect('inicio-seccion')
     else:
