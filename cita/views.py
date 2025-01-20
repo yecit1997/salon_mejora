@@ -9,7 +9,7 @@ from .citaForm import citaForm
 
 # Pedir una cita
 # @login_required(login_url='inicio-sesion')
-@permission_required('cliente.puede_citar_cliente',login_url='inicio-seccion', raise_exception=False)
+@permission_required('cliente.puede_citar_cliente',login_url='inicio-seccion', raise_exception=True)
 def crear_cita(request, id):
     servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
     cliente = get_object_or_404(Cliente, user=request.user) # Obtenemos el cliente que está logueado
@@ -34,7 +34,7 @@ def crear_cita(request, id):
     
 
 # Listamos las citas que tenemos en el sistema
-@permission_required('Estilista.puede_ver_listas', login_url='inicio-seccion', raise_exception=False)
+@permission_required('Estilista.puede_ver_listas', login_url='inicio-seccion', raise_exception=True)
 def listar_citas(request):
     citas = Cita.objects.all()
     
@@ -46,6 +46,7 @@ def listar_citas(request):
 
 
 # Editar una cita // Solo para el administrador y clientes
+@permission_required(['cliente.puede_citar_cliente', 'Estilista.puede_ver_listas', 'auth.is_superuser'],login_url='inicio-seccion', raise_exception=True)
 def editar_cita(request, id):
     cita = get_object_or_404(Cita, id=id)
     servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
@@ -67,6 +68,7 @@ def editar_cita(request, id):
 
 
 # Eliminar Citas // Solo para el administrador y clientes
+@permission_required(['cliente.puede_citar_cliente', 'auth.is_superuser'],login_url='inicio-seccion', raise_exception=True)
 def eliminar_cita(request, id):
     cita = get_object_or_404(Cita, id=id)
     cita.delete()

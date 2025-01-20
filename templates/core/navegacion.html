@@ -9,9 +9,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-bag"></i>Servicios</a>
                     <ul class="dropdown-menu">
-                        {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="{% url 'crear-servicios' %}">Crear</a></li>
-                        {% endif %}
                         <li><a class="dropdown-item" href="{% url 'lista-servicios' %}">Listar</a></li>
                     </ul>
                 </li>
@@ -20,10 +18,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-scissors"></i>Estilistas</a>
                         <ul class="dropdown-menu">
-                            
-                            
                                     <li><a class="dropdown-item" href="{% url 'crear-estilista' %}">Crear</a></li>
-                            
                             <li><a class="dropdown-item" href="{% url 'lista-estilistas' %}">Listar</a></li>
                         </ul>
                     </li>
@@ -39,7 +34,6 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-calendar"></i>Citas</a>
                         <ul class="dropdown-menu">
-                            {% comment %} <li><a class="dropdown-item" href="{% url 'crear-cita' servicio.id %}">Crear</a></li> {% endcomment %}
                             <li><a class="dropdown-item" href="{% url 'listar-citas' %}">Listar</a></li>
                         </ul>
                     </li>

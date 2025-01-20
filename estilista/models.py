@@ -22,6 +22,7 @@ class Estilista(models.Model):
     def __str__(self):
         return f"{self.user.last_name} {self.user.first_name}"
 
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if self.user and self.rol == "estilistas":

@@ -21,7 +21,6 @@ def inicio_seccion(request):
     return render(request, 'usuarios/inicio_seccion.html', context=context)
 
 
-
 def cerrar_seccion(request):
     '''
     Definimos el cierre de la seccion y direccionamos al usuario nuevamente a la pagina de inicio de seccion
