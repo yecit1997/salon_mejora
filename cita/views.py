@@ -8,7 +8,6 @@ from .citaForm import citaForm
 
 
 # Pedir una cita
-# @login_required(login_url='inicio-sesion')
 @permission_required('cliente.puede_citar_cliente',login_url='inicio-seccion', raise_exception=True)
 def crear_cita(request, id):
     servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado

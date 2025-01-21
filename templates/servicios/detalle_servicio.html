@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Detalle de Servicio{% endblock title %}
+
+{% block styles %}
+<style>
+    .card-img-top {
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<h2 class="text-center my-4">Detalle de Servicio</h2>
+
+<div class="card mt-5 mb-5">
+    <img
+        class="card-img-top"
+        src="{% static 'img/imagenes_fondo/peluqueria1.jpg' %}"
+        alt="Card image cap"
+    />
+    <div class="card-body">
+        <h4 class="card-title">Corte de cabello</h4>
+        <p class="card-text"> {% lorem 2 p random %} </p>
+        <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'lista-servicios' %} " role="button">Volver </a>
+        <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'crear-cita' servicio.id %} " role="button">Citar</a>
+    </div>
+</div>
+
+
+{% endblock content %}

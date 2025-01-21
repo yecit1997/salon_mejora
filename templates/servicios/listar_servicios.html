@@ -61,17 +61,8 @@
                 <h6 class="card-text">Precio: ${{ servicio.precio }}</h6>
             </div>
             <div class="card-footer bg-transparent border-0">
-                <a class="btn btn-sm btn-secondary btn-custom" href="#" role="button">Detalle</a>
-                
-                {% comment %} 
-                    Controlamos la solicitud de una cita, si el usuario está autenticado.
-                    Si el usuario no está autenticado, lo redirigimos a la página de inicio de sesión.
-                {% endcomment %}
-                <a class="btn btn-sm btn-dark btn-custom" href=" 
-                
-                    {% url 'crear-cita' servicio.id %}
-                
-                     " role="button">Citar</a>
+                <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'detalle-servicios' servicio.id %} " role="button">Detalle</a>
+                <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'crear-cita' servicio.id %} " role="button">Citar</a>
                 <a class="btn btn-sm btn-dark btn-custom" href="#" role="button">Editar</a>
             </div>
         </div>

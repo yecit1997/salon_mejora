@@ -32,5 +32,35 @@ def listar_servicios(request):
     return render(request, 'servicios/listar_servicios.html', context=context)
 
 
+# Editar servicios
+def editar_servicio(request, pk):
+    servicio = get_object_or_404(Servicio, pk=pk)
+    
+    if request.method == 'POST':
+        form = servicioForm(request.POST, instance=servicio)
+        if form.is_valid():
+            form.save()
+            return redirect('lista-servicios')
+        else:
+            form = servicioForm(instance=servicio)
+            
+
+# Ver detalle
+def detelle_servicio(request, pk):
+    servicio = get_object_or_404(Servicio, pk=pk)
+    
+    context = {
+        'servicio': servicio
+    }
+    return render(request, 'servicios/detalle_servicio.html', context=context)
+
+
+# Eliminar servidios
+def eliminar_servicio(request, pk):
+    servicio = get_object_or_404(Servicio, pk=pk)
+    servicio.delete()
+    
+    return redirect('lista-servicios')
+
 
 
