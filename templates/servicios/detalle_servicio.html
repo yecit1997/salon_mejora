@@ -30,10 +30,11 @@
         alt="Card image cap"
     />
     <div class="card-body">
-        <h4 class="card-title">Corte de cabello</h4>
-        <p class="card-text"> {% lorem 2 p random %} </p>
+        <h4 class="card-title">{{servicio.nombre}}</h4>
+        <p class="card-text"> {{servicio.descripcion}}</p>
         <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'lista-servicios' %} " role="button">Volver </a>
         <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'crear-cita' servicio.id %} " role="button">Citar</a>
+        <a class="btn btn-sm btn-danger btn-custom" href=" {% url 'eliminar-servicio' servicio.id %} " role="button">Eliminar</a>
     </div>
 </div>
 

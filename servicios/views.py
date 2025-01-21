@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 
 # Crear servicios
-@permission_required('auth.is_superuser', raise_exception=False)
+@permission_required('auth.is_superuser', raise_exception=True)
 def crear_servicios(request):
     if request.method == 'POST':
         form = servicioForm(request.POST)
@@ -33,6 +33,7 @@ def listar_servicios(request):
 
 
 # Editar servicios
+@permission_required('auth.is_superuser', raise_exception=True)
 def editar_servicio(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
     
@@ -56,6 +57,7 @@ def detelle_servicio(request, pk):
 
 
 # Eliminar servidios
+@permission_required('auth.is_superuser', raise_exception=True)
 def eliminar_servicio(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
     servicio.delete()
