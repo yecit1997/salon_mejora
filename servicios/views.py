@@ -45,6 +45,11 @@ def editar_servicio(request, pk):
         else:
             form = servicioForm(instance=servicio)
             
+        context = {
+            'form': form
+        }
+        return render(request, 'servicios/editar_servicio.html', context=context)    
+
 
 # Ver detalle
 def detelle_servicio(request, pk):

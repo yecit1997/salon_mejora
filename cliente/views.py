@@ -66,6 +66,7 @@ def ver_cliente(request, dni):
     }
     return render(request, 'clientes/ver_cliente.html', context=context)
 
+
 # Editar cliente
 def editar_cliente(request, dni):
     estilista = get_object_or_404(Cliente, dni=dni)
