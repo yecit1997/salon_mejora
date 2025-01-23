@@ -7,7 +7,6 @@
 
 
 {% block content %}
-<h2 class="text-center my-4">Editar Servicio</h2>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -17,7 +16,7 @@
                     <form method="POST" class="my-class">
                         {% csrf_token %}
                         {{form|crispy}}
-                        <button type="submit" class="btn btn-primary d-block w-100">Registrar</button>
+                        <button type="submit" class="btn btn-primary d-block w-100">Editar</button>
                     </form>
                 </div>
             </div>

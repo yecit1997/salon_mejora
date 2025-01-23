@@ -7,7 +7,7 @@
     
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center">Registro de Clientes</h2>
+    <h2 class="text-center">Pedir cita</h2>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card mt-5 mb-5">
@@ -20,9 +20,9 @@
                         {% csrf_token %}
                         {{form|crispy}}
                         <input type="hidden" name="servicio" value="{{ servicio.id }}">
-                        {% comment %} <button type="submit" class="btn btn-primary d-block w-100">Registrar</button> {% endcomment %}
                         <div class="card-footer bg-transparent border-0 content-center">
-                            <a class="btn btn-primary " href=" {% url 'detalle-servicios' servicio.id %} " role="button">Registrar</a>
+                            <button type="submit" class="btn btn-primary ">Registrar</button>
+                            {% comment %} <a class="btn btn-primary " type="submit" role="button">Registrar</a> {% endcomment %}
                             <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'lista-servicios' %} " role="button">Volver </a>
                         </div>
                     </form>
