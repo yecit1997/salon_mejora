@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
-from django.core.mail import send_mail
 from cliente.models import Cliente
 from servicios.models import Servicio
 from .models import Cita
 from .citaForm import citaForm
+from cita.correo_creacion_cita import enviar_correo
 
 
 
@@ -22,14 +22,8 @@ def crear_cita(request, id):
             cita.save() # Guardamos la cita en la base de datos
             
             # Enviar correo al cliete con los datos de la cita
-            destinatarios = [cliente.user.email, cita.estilista.user.email]
-            asunto = "Nueva Cita Programada" 
-            mensaje = f"""Se ha generado una nueva cita. 
-            Servicio: {cita.servicio.nombre} 
-            Cliente: {cliente.user.get_full_name()} 
-            Estilista: {cita.estilista.user.get_full_name()} 
-            Fecha: {cita.fecha} Hora: {cita.hora} """ 
-            send_mail(asunto, mensaje, 'tusitioweb@correo.com', destinatarios)
+            enviar_correo(cliente, cita)
+            
             return redirect('lista-servicios')
     else:
         form = citaForm()
