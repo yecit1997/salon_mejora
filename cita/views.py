@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import  permission_required
+from django.contrib import messages
 from cliente.models import Cliente
 from servicios.models import Servicio
 from .models import Cita
@@ -23,6 +24,7 @@ def crear_cita(request, id):
             
             # Enviar correo al cliete con los datos de la cita
             enviar_correo(cliente, cita)
+            messages.success(request,'Cita creada con exito 😊')
             
             return redirect('lista-servicios')
     else:
