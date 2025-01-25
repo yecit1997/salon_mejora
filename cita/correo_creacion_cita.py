@@ -9,4 +9,4 @@ def enviar_correo(cliente, cita):
             Cliente: {cliente.user.get_full_name()} 
             Estilista: {cita.estilista.user.get_full_name()} 
             Fecha: {cita.fecha} Hora: {cita.hora} """
-    send_mail(asunto, mensaje, "tusitioweb@correo.com", destinatarios)
+    send_mail(asunto, mensaje, "tyecit@gmail.com", destinatarios)
