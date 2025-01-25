@@ -61,6 +61,7 @@ def editar_cita(request, id):
         form = citaForm(request.POST, instance=cita)
         if form.is_valid():
             form.save()
+            messages.success(request, 'La cita fue modificada con exito 😊')
             return redirect('listar-citas')
     else:
         form = citaForm(instance=cita)
@@ -78,4 +79,5 @@ def editar_cita(request, id):
 def eliminar_cita(request, id):
     cita = get_object_or_404(Cita, id=id)
     cita.delete()
+    messages.warning(request, 'La cita fue eliminada con exito ❌')
     return redirect('listar-citas')
