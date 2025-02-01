@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .estilistaForm import EstilistaForm
+from core.paginador import paginador
 from .models import Estilista
 from django.db import models
 
@@ -37,6 +38,8 @@ def crear_estilista(request):
 # Listar estilistas
 def lista_estilistas(request):
     estilistas = Estilista.objects.all()
+    # Paginación
+    estilistas = paginador(estilistas, request)
     status = request.GET.get('status', 'all')
     
     if status == 'active':

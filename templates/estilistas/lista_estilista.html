@@ -66,6 +66,8 @@
     </div>
 </div>
 
+{% include 'core/paginador.html' with paginador=estilistas %}
+
 <script>
 // Filtrar en tiempo real
 document.getElementById('searchInput').addEventListener('keyup', function() {

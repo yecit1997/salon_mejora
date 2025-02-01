@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Servicio
 from .serviciosForm import servicioForm
+from core.paginador import paginador
 
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -25,9 +26,9 @@ def crear_servicios(request):
 # Listar servicios
 def listar_servicios(request):
     servicios = Servicio.objects.all()
-    
+    servicios = paginador(servicios,request )
     context = {
-        'servicios': servicios
+        'servicios': servicios,
     }
     return render(request, 'servicios/listar_servicios.html', context=context)
 
