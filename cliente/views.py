@@ -51,10 +51,10 @@ def registro_cliente(request):
 # Listar cliente
 def listar_clientes(request):
     clientes = Cliente.objects.all()
-    paginado=paginador(clientes, request)
+    paginator=paginador(clientes, request)
     context = {
         'clientes': clientes,
-        'paginado':paginado
+        'paginator':paginator
     }
     
     return render (request, 'clientes/listar_clientes.html', context=context)
