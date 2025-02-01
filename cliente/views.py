@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+# from django.core.paginator import Paginator
+from .paginador import paginador
 from .models import Cliente
 from .clienteForm import CombinedUserClienteForm
 from django.contrib import messages
@@ -46,15 +48,22 @@ def registro_cliente(request):
     return render(request, 'clientes/registro.html', context=context)
 
 
+    
 # Listar cliente
 def listar_clientes(request):
     clientes = Cliente.objects.all()
-        
+    c=paginador(clientes, request)
+    # paginator = Paginator(clientes, 10)
+    # page_number = request.GET.get('page')
+    # clientes = paginator.get_page(page_number)
     context = {
-        'clientes': clientes
+        'clientes': clientes,
+        'c':c
     }
     
     return render (request, 'clientes/listar_clientes.html', context=context)
+
+
 
 
 # Ver cliente

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import  permission_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 from cliente.models import Cliente
 from servicios.models import Servicio
 from .models import Cita
@@ -43,7 +44,9 @@ def crear_cita(request, id):
 @permission_required('Estilista.puede_ver_listas', login_url='inicio-seccion', raise_exception=True)
 def listar_citas(request):
     citas = Cita.objects.all()
-    
+    paginator = Paginator(citas, 10) # Mostramos 10 citas por página
+    page = request.GET.get('page')
+    citas = paginator.get_page(page)
     context = {
         'citas': citas
     }
