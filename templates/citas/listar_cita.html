@@ -3,70 +3,59 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block title %}Lista citas{% endblock title %}
-    
+{% block title %}
+  Lista citas
+{% endblock %}
+
 {% block content %}
-<h2>Lista de citas</h2>
+  <h2>Lista de citas</h2>
 
-
-<div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center">
     <table class="table table-dark table-hover mt-5" style="width: 75%;">
-        <thead>
-            <tr>
-                <th scope="col">Servicio</th>
-                <th scope="col">Estilista</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Hora</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="estilistaTable">
-            {% for cita in citas %}
-            <tr>
-                <th scope="row">{{ cita.servicio.nombre }}</th>
-                <td>{{ cita.estilista }}</td>
-                <td>{{ cita.cliente }}</td>
-                <td>{{ cita.fecha }}</td>
-                <td>{{ cita.hora }}</td>
-                <td>
-                    <a href=" {% url 'editar-cita' cita.id %} " class="btn btn-link text-info">
-                        <i class="bi bi-pencil"></i>
-                    </a>
+      <thead>
+        <tr>
+          <th scope="col">Servicio</th>
+          <th scope="col">Estilista</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="estilistaTable">
+        {% for cita in citas %}
+          <tr>
+            <th scope="row">{{ cita.servicio.nombre }}</th>
+            <td>{{ cita.estilista }}</td>
+            <td>{{ cita.cliente }}</td>
+            <td>{{ cita.fecha }}</td>
+            <td>{{ cita.hora }}</td>
+            <td>
+              <a href=" {% url 'editar-cita' cita.id %} " class="btn btn-link text-info"><i class="bi bi-pencil"></i></a>
 
-                    <a href="" class="btn btn-link text-info">
-                        <i class="bi bi-eye-fill"></i>
-                    </a>
-                    
-                    <a href=" {% url 'eliminar-cita' cita.id %} " class="btn btn-link text-danger" 
-                    onclick="return confirm('¿Estás seguro de eliminar el estilista?');">
-                        <i class="bi bi-trash-fill"></i> 
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
+              <a href="" class="btn btn-link text-info"><i class="bi bi-eye-fill"></i></a>
+
+              <a href=" {% url 'eliminar-cita' cita.id %} " class="btn btn-link text-danger" onclick="return confirm('¿Estás seguro de eliminar el estilista?');"><i class="bi bi-trash-fill"></i></a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
     </table>
-</div>
+  </div>
 
-<div class="pagination">
+  <div class="pagination">
     <span class="step-links">
-        {% if citas.has_previous %}
-            <a href="?page=1">&laquo; primera</a>
-            <a href="?page={{ citas.previous_page_number }}">anterior</a>
-        {% endif %}
+      {% if paginator.has_previous %}
+        <a href="?page=1">&laquo; primera</a>
+        <a href="?page={{ paginator.previous_page_number }}">anterior</a>
+      {% endif %}
 
-        <span class="current">
-            Página {{ citas.number }} de {{ citas.paginator.num_pages }}.
-        </span>
+      <span class="current">Página {{ paginator.number }} de {{ paginator.paginator.num_pages }}.</span>
 
-        {% if citas.has_next %}
-            <a href="?page={{ citas.next_page_number }}">siguiente</a>
-            <a href="?page={{ citas.paginator.num_pages }}">última &raquo;</a>
-        {% endif %}
+      {% if paginator.has_next %}
+        <a href="?page={{ paginator.next_page_number }}">siguiente</a>
+        <a href="?page={{ paginator.paginator.num_pages }}">última &raquo;</a>
+      {% endif %}
     </span>
-</div>
-
-{% endblock content %}
-    
-    
+  </div>
+{% endblock %}
