@@ -14,31 +14,34 @@ from cita.correo_creacion_cita import enviar_correo
 # Pedir una cita
 @permission_required(['cliente.puede_citar_cliente'],login_url='inicio-seccion', raise_exception=True)
 def crear_cita(request, id):
-    servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
-    cliente = get_object_or_404(Cliente, user=request.user) # Obtenemos el cliente que está logueado
-    if request.method == 'POST':
-        form = citaForm(request.POST)
-        if form.is_valid():
-            cita = form.save(commit=False) # Guardamos el formulario sin enviarlo a la base de datos
-            cita.servicio = servicio
-            cita.cliente = cliente
-            cita.save() # Guardamos la cita en la base de datos
+    try:
+        servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
+        cliente = get_object_or_404(Cliente, user=request.user) # Obtenemos el cliente que está logueado
+        if request.method == 'POST':
+            form = citaForm(request.POST)
+            if form.is_valid():
+                cita = form.save(commit=False) # Guardamos el formulario sin enviarlo a la base de datos
+                cita.servicio = servicio
+                cita.cliente = cliente
+                cita.save() # Guardamos la cita en la base de datos
+                
+                # Enviar correo al cliete con los datos de la cita
+                enviar_correo(cliente, cita)
+                messages.success(request,'Cita creada con exito 😊')
+                
+                return redirect('lista-servicios')
+        else:
+            form = citaForm()
             
-            # Enviar correo al cliete con los datos de la cita
-            enviar_correo(cliente, cita)
-            messages.success(request,'Cita creada con exito 😊')
-            
-            return redirect('lista-servicios')
-    else:
-        form = citaForm()
+        context = {
+            'form': form,
+            'servicio':servicio,
+            'cliente':cliente
+            }
         
-    context = {
-        'form': form,
-        'servicio':servicio,
-        'cliente':cliente
-        }
-    
-    return render(request, 'citas/pedir_cita.html', context=context)
+        return render(request, 'citas/pedir_cita.html', context=context)
+    except:
+      return render(request, 'core/pedir_sin_permisos.html')
     
 
 # Listamos las citas que tenemos en el sistema
