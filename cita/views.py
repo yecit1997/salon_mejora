@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import  permission_required
 from django.contrib import messages
-# from django.core.paginador import paginador
 from core.paginador import paginador
 from cliente.models import Cliente
 from servicios.models import Servicio
 from .models import Cita
 from .citaForm import citaForm
 from cita.correo_creacion_cita import enviar_correo
+
 
 
 
@@ -45,7 +45,7 @@ def crear_cita(request, id):
     
 
 # Listamos las citas que tenemos en el sistema
-@permission_required('Estilista.puede_ver_listas', login_url='inicio-seccion', raise_exception=True)
+@permission_required('cita.view_cita', login_url='inicio-seccion', raise_exception=True)
 def listar_citas(request):
     citas = Cita.objects.all()
     citas = paginador(citas,request)

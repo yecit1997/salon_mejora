@@ -1,58 +1,42 @@
-body {
-    background-image: url("../img/imagenes_fondo/peluqueria.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    color: #fff;
-}
+/* inicio_seccion.css */
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.6);
-    /* Fondo semi-transparente */
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
     padding: 20px;
-    border-radius: 10px;
-}
-
-h2 {
-    text-align: center;
-    margin-top: 20px;
-    color: #fff;
-}
-
-.navbar-text {
-    color: #fff;
-}
-
-form .form-control {
-    width: 100%;
-}
-
-form label {
-    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card {
-    background-color: rgba(255, 255, 255, 0.9);
-    /* Fondo de la tarjeta semi-transparente */
-    border-radius: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    border-radius: 20px;
+.card-img-top {
+    border-bottom: 1px solid #ddd;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.card-body {
+    padding: 2rem;
+    text-align: center;
 }
 
-.badge {
-    background-color: #007bff;
-    border-radius: 20px;
+.card-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.badge:hover {
-    background-color: #0056b3;
+.form-control {
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.btn {
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
 }

@@ -9,7 +9,7 @@ class Estilista(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dni = models.CharField(max_length=10, unique=True, primary_key=True)
     telefono = models.CharField(max_length=20, unique=True)
-    rol = models.CharField(max_length=30, default='estilistas')  # Nota el uso de 'related_name'
+    rol = models.CharField(max_length=30, default='estilistas')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 

@@ -17,12 +17,6 @@
     </div>
     
 
-
-
-
-
-
-
     <style>
         /* Opcional: Agrega un toque personalizado a la barra de navegación */
     .navbar-brand {
@@ -100,20 +94,3 @@
     </nav>
     
 
-from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.decorators import permission_required
-from django.shortcuts import redirect
-
-# Verifica si el usuario es superusuario
-def superuser_required(view_func):
-    decorated_view_func = user_passes_test(
-        lambda u: u.is_superuser,
-        login_url='inicio-seccion'
-    )(view_func)
-    return decorated_view_func
-
-@superuser_required
-@permission_required('Cliente.puede_citar', raise_exception=False)
-def tu_vista(request):
-    # Tu lógica aquí
-    return render(request, 'tu_template.html')

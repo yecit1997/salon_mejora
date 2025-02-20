@@ -1,10 +1,8 @@
+from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Servicio
 from .serviciosForm import servicioForm
 from core.paginador import paginador
-
-from django.contrib.auth.decorators import login_required, permission_required
-
 
 # Crear servicios
 @permission_required('auth.is_superuser', raise_exception=True)
@@ -26,6 +24,7 @@ def crear_servicios(request):
 # Listar servicios
 def listar_servicios(request):
     servicios = Servicio.objects.all()
+    
     servicios = paginador(servicios,request )
     context = {
         'servicios': servicios,
