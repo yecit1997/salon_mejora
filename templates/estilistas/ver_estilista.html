@@ -67,6 +67,14 @@
                     {{ estilista.rol }}
                 </div>
             </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <strong>Activo:</strong>
+                </div>
+                <div class="col-md-8">
+                    {{ estilista.user.is_active }}
+                </div>
+            </div>
             <div class="row mt-4">
                 <div class="col text-center">
                     <a href="{% url 'lista-estilistas' %}" class="btn btn-primary">Regresar a la Lista</a>

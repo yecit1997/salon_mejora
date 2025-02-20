@@ -11,17 +11,8 @@
 
     <!-- Campo de búsqueda y selector de estado -->
     <div class="row mb-3">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <input type="text" id="searchInput" class="form-control" placeholder="Buscar estilista...">
-        </div>
-        <div class="col-md-4">
-            <form method="GET" id="statusForm">
-                <select name="status" class="form-select" onchange="document.getElementById('statusForm').submit();">
-                    <option value="all" {% if status == 'all' %}selected{% endif %}>Todos</option>
-                    <option value="active" {% if status == 'active' %}selected{% endif %}>Activos</option>
-                    <option value="disabled" {% if status == 'disabled' %}selected{% endif %}>Deshabilitados</option>
-                </select>
-            </form>
         </div>
     </div>
 
