@@ -1,7 +1,7 @@
 from django.urls import path
 from cita import views
 
-
+app_name = 'cita'
 
 urlpatterns = [
     path('listar-citas/', views.listar_citas, name='listar-citas'),

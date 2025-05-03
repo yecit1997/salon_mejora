@@ -25,4 +25,3 @@ class Cita(models.Model):
     
     
     
-    
