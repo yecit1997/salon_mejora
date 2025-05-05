@@ -11,9 +11,9 @@ def inicio_seccion(request):
             user = authenticate(username=usuario, password=clave)
             if user is not None:
                 login(request, user)
-                return redirect('lista-servicios')
+                return redirect('servicios:lista-servicios')
             else:
-                return redirect('lista-servicios')
+                return redirect('servicios:lista-servicios')
     
     context = {
         'form': LoginForm()

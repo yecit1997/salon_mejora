@@ -60,8 +60,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-person"></i> Clientes</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'registro-cliente' %}">Crear</a></li>
-                            <li><a class="dropdown-item" href="{% url 'listar-cliente' %}">Listar</a></li>
+                            <li><a class="dropdown-item" href="{% url 'cliente:registro-cliente' %}">Crear</a></li>
+                            <li><a class="dropdown-item" href="{% url 'cliente:listar-cliente' %}">Listar</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -82,10 +82,10 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inicio-seccion' %}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                            <a class="nav-link" href="{% url 'cliente:inicio-seccion' %}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registro-cliente' %}"><i class="bi bi-person-plus"></i> Register</a>
+                            <a class="nav-link" href="{% url 'cliente:registro-cliente' %}"><i class="bi bi-person-plus"></i> Register</a>
                         </li>
                     {% endif %}
                 </ul>
