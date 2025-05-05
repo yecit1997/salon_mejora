@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from core.paginador import paginador
 from .models import Cliente
+from cita.models import Cita
 from .clienteForm import CombinedUserClienteForm
 from django.contrib import messages
 
@@ -51,10 +52,9 @@ def registro_cliente(request):
 # Listar cliente
 def listar_clientes(request):
     clientes = Cliente.objects.all()
-    paginator=paginador(clientes, request)
+    clientes=paginador(clientes, request)
     context = {
         'clientes': clientes,
-        'paginator':paginator
     }
     
     return render (request, 'clientes/listar_clientes.html', context=context)
@@ -111,5 +111,18 @@ def eliminar_cliente(request, dni):
     return redirect('listar-cliente')
 
 
-
+def ver_mis_citas(request):
+    if request.user.is_authenticated:
+        cliente = get_object_or_404(Cliente, user=request.user)
+        citas_all_cliente = Cita.objects.filter(cliente=cliente).order_by('-fecha_creacion')
+        citas = paginador(citas_all_cliente, request)
+        
+        context = {
+            'citas': citas,
+            'cliente': cliente
+        }
+        
+        return render(request, 'clientes/ver_mis_citas.html', context=context)
+    else:
+        return redirect('inicio-seccion')
 

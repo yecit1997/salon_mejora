@@ -9,5 +9,6 @@ urlpatterns = [
     path('editar-cliente/<str:dni>', views.editar_cliente, name='editar-cliente'),
     path('eliminar-cliente/<str:dni>', views.eliminar_cliente, name='eliminar-cliente'),
     path('ver-cliente/<str:dni>', views.ver_cliente, name='ver-cliente'),
+    path('ver-mis-citas/', views.ver_mis_citas, name='ver-mis-citas'),
     
 ]

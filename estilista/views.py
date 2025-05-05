@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+
 from .estilistaForm import EstilistaForm
 from core.paginador import paginador
 from .models import Estilista
+from cita.models import Cita
 from django.db import models
 
 
@@ -22,7 +25,7 @@ def crear_estilista(request):
                 user=user,
                 dni=form.cleaned_data['dni'],
                 telefono=form.cleaned_data['telefono'],
-                rol='estilistas'
+                rol='estilista'
             )
             # login(request, user)
             return redirect('lista-estilistas')
@@ -36,6 +39,7 @@ def crear_estilista(request):
 
 
 # Listar estilistas
+@permission_required('auth.is_superuser', raise_exception=True)
 def lista_estilistas(request):
     estilistas = Estilista.objects.all()
     # Paginación
@@ -107,17 +111,40 @@ def ver_estilista(request, dni):
 
 
 # Eliminar estilista
+@permission_required('auth.is_superuser', raise_exception=True)
 def eliminar_estilista(request, dni):
     estilista = get_object_or_404(Estilista, dni=dni)
     estilista.delete()
     return redirect('lista-estilistas')
 
 
+# Cambiar estado estilista
+@permission_required('auth.is_superuser', raise_exception=True)
+def cambiar_estado_estilista(request, dni):
+    estilista = get_object_or_404(Estilista, dni=dni)
+    if request.method == 'POST':
+        if estilista.user.is_active:
+            estilista.user.is_active = False
+        else:
+            estilista.user.is_active = True
+        estilista.user.save()
+        return redirect('lista-estilistas')
+    
+    context = {
+        'estilista': estilista
+    }
+    return render(request, 'estilistas/cambiar_estado_estilista.html', context=context)
 
 
-
-
-
+def ver_mis_citas(request):
+    estilista = get_object_or_404(Estilista, user=request.user)
+    cita = Cita.objects.filter(estilista=estilista)
+    print(cita)
+    context = {
+        'estilista': estilista,
+        'cita': cita,
+    }
+    return render(request, 'estilistas/ver_mis_citas.html', context=context)
 
 
 

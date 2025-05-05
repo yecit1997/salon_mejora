@@ -5,12 +5,13 @@ from core.paginador import paginador
 from cliente.models import Cliente
 from servicios.models import Servicio
 from .models import Cita
+from estilista.models import Estilista
 from .citaForm import citaForm
 from cita.correo_creacion_cita import enviar_correo
 
 
 # Pedir una cita
-@permission_required(['cliente.puede_citar_cliente', 'auth.is_superuser'],login_url='inicio-seccion', raise_exception=True)
+# @permission_required(['cliente.puede_citar_cliente', 'auth.is_superuser'],login_url='inicio-seccion', raise_exception=True)
 def crear_cita(request, id):
     try:
         servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
@@ -43,7 +44,7 @@ def crear_cita(request, id):
     
 
 # Listamos las citas que tenemos en el sistema
-@permission_required('cita.view_cita', login_url='inicio-seccion', raise_exception=True)
+@permission_required(['cita.view_cita', 'Estilista.puede_ver_listas', 'auth.is_superuser'], login_url='inicio-seccion', raise_exception=True)
 def listar_citas(request):
     try:
         citas = Cita.objects.all()
@@ -93,3 +94,7 @@ def eliminar_cita(request, id):
     cita.delete()
     messages.warning(request, 'La cita fue eliminada con exito ❌')
     return redirect('cita:listar-citas')
+
+
+
+
