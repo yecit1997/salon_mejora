@@ -1,8 +1,11 @@
 body{
-    background: linear-gradient(135deg, #d6f2fc, #d6f2fc, #d6f2fc, #d6f2fc, #d6f2fc);
+    /* background: linear-gradient(135deg, #d6f2fc, #6fc8e9, #104d63, #d6f2fc, #204958);
     background-size: 400% 400%;
-    font-family:Arial, Helvetica, sans-serif;
-
+    font-family:Arial, Helvetica, sans-serif; */
+    background-image: url(../img/imagenes_fondo/fondo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 h2{

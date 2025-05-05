@@ -31,15 +31,15 @@
                 <td>{{ cliente.user.email }}</td>
                 <td>{{ cliente.rol }}</td>
                 <td>
-                    <a href=" {% url 'editar-cliente' cliente.dni %} " class="btn btn-link text-info">
+                    <a href=" {% url 'cliente:editar-cliente' cliente.dni %} " class="btn btn-link text-info">
                         <i class="bi bi-pencil"></i>
                     </a>
 
-                    <a href=" {% url 'ver-cliente' cliente.dni %} " class="btn btn-link text-info">
+                    <a href=" {% url 'cliente:ver-cliente' cliente.dni %} " class="btn btn-link text-info">
                         <i class="bi bi-eye-fill"></i>
                     </a>
                     
-                    <a href=" {% url 'eliminar-cliente' cliente.dni %} " class="btn btn-link text-danger" 
+                    <a href=" {% url 'cliente:eliminar-cliente' cliente.dni %} " class="btn btn-link text-danger" 
                     onclick="return confirm('¿Estás seguro de eliminar el estilista?');">
                         <i class="bi bi-trash-fill"></i> 
                     </a>

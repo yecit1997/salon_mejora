@@ -52,7 +52,7 @@
 {% block content %}
   <div class="container mb-5 mt-5">
     {% if user.is_superuser %}
-      {% include 'components/botton_add.html' with directionUrl='crear-servicios' classIcon='bi bi-plus-lg' %}
+      {% include 'components/botton_add.html' with directionUrl='servicios:crear-servicios' classIcon='bi bi-plus-lg' %}
     {% endif %}
     <div class="card-container pt-3">
       {% for servicio in servicios %}
@@ -64,9 +64,9 @@
             <h6 class="card-text">Precio: ${{ servicio.precio }}</h6>
           </div>
           <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'detalle-servicios' servicio.id %} " role="button">Detalle</a>
+            <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'servicios:detalle-servicios' servicio.id %} " role="button">Detalle</a>
             <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'cita:crear-cita' servicio.id %} " role="button">Citar</a>
-            <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'editar-servicios' servicio.id %} " role="button">Editar</a>
+            <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'servicios:editar-servicios' servicio.id %} " role="button">Editar</a>
           </div>
         </div>
       {% empty %}

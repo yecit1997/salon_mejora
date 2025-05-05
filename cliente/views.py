@@ -60,8 +60,6 @@ def listar_clientes(request):
     return render (request, 'clientes/listar_clientes.html', context=context)
 
 
-
-
 # Ver cliente
 def ver_cliente(request, dni):
     cliente = get_object_or_404(Cliente, dni=dni)
@@ -96,7 +94,7 @@ def editar_cliente(request, dni):
             # Guardar el estilista
             form.save()
 
-            return redirect('listar-cliente')
+            return redirect('cliente:listar-cliente')
     
     context = {
         'form': form
@@ -108,7 +106,7 @@ def editar_cliente(request, dni):
 def eliminar_cliente(request, dni):
     cliente = get_object_or_404(Cliente, dni=dni)
     cliente.delete()
-    return redirect('listar-cliente')
+    return redirect('cliente:listar-cliente')
 
 
 def ver_mis_citas(request):

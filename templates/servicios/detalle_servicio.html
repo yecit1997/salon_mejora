@@ -8,7 +8,7 @@
 {% block styles %}
 <style>
     .card-img-top {
-        height: 250px;
+        height: 400px;
         object-fit: cover;
     }
 
@@ -21,20 +21,19 @@
 {% endblock styles %}
 
 {% block content %}
-<h2 class="text-center my-4">Detalle de Servicio</h2>
 
-<div class="card mt-5 mb-5">
+<div class="card mt-5 mb-5 pb-5 mx-auto" style="width: 40rem;">
     <img
-        class="card-img-top"
+        class="card-img-top img-fluid"
         src="{% static 'img/imagenes_fondo/peluqueria1.jpg' %}"
         alt="Card image cap"
     />
     <div class="card-body">
         <h4 class="card-title">{{servicio.nombre}}</h4>
         <p class="card-text"> {{servicio.descripcion}}</p>
-        <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'lista-servicios' %} " role="button">Volver </a>
+        <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'servicios:lista-servicios' %} " role="button">Volver </a>
         <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'cita:crear-cita' servicio.id %} " role="button">Citar</a>
-        <a class="btn btn-sm btn-danger btn-custom" href=" {% url 'eliminar-servicios' servicio.id %} " role="button"
+        <a class="btn btn-sm btn-danger btn-custom" href=" {% url 'servicios:eliminar-servicios' servicio.id %} " role="button"
         onclick="return confirm('¿Estás seguro de eliminar el servicio?');"> Eliminar</a>
     </div>
 </div>

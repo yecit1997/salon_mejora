@@ -5,7 +5,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'lista-servicios' or request.resolver_match.url_name == 'crear-servicios '%} active {% endif %}" aria-current="page" href="{% url 'lista-servicios' %}">Servicios</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'lista-servicios' or request.resolver_match.url_name == 'crear-servicios' %} active {% endif %}" aria-current="page" href="{% url 'servicios:lista-servicios' %}">Servicios</a>
         </li>
 
         {% comment %}Creamos un enlace para que los estilistas puedan visualizar las citas que tienen asignadas.{% endcomment %}
@@ -24,10 +24,10 @@
         {% comment %}Creamos enlaces para que los administradores puedan visualizar los estilistas y clientes.{% endcomment %}
         {% if user.is_superuser %}
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name in 'lista-estilistas' or request.resolver_match.url_name == 'crear-estilista' %} active {% endif %}" href="{% url 'estilista:lista-estilistas' %}">Estilistas</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'lista-estilistas' or request.resolver_match.url_name == 'crear-estilista' %} active {% endif %}" href="{% url 'estilista:lista-estilistas' %}">Estilistas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'listar-cliente' %} active {% endif %}" href="{% url 'listar-cliente' %}">Clientes</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'listar-cliente' %} active {% endif %}" href="{% url 'cliente:listar-cliente' %}">Clientes</a>
           </li>
         {% endif %}
       </ul>
@@ -37,7 +37,7 @@
           <a class="nav-link" href=" {% url 'cerrar-seccion' %} "><i class="bi bi-box-arrow-right"></i> Logout</a>
         {% else %}
           <a class="nav-link" href="{% url 'inicio-seccion' %}"><i class="bi bi-door-open"></i> Login</a>
-          <a class="nav-link" href="{% url 'registro-cliente' %}"><i class="bi bi-person-plus"></i> Register</a>
+          <a class="nav-link" href="{% url 'cliente:registro-cliente' %}"><i class="bi bi-person-plus"></i> Register</a>
         {% endif %}
       </div>
     </div>

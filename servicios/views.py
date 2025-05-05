@@ -12,7 +12,7 @@ def crear_servicios(request):
         form = servicioForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista-servicios')
+            return redirect('servicios:lista-servicios')
     else:
         form = servicioForm()
     
@@ -41,7 +41,7 @@ def editar_servicio(request, pk):
         form = servicioForm(request.POST, instance=servicio)
         if form.is_valid():
             form.save()
-            return redirect('lista-servicios')
+            return redirect('servicios:lista-servicios')
     else:
         form = servicioForm(instance=servicio)
             
@@ -67,7 +67,7 @@ def eliminar_servicio(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
     servicio.delete()
     
-    return redirect('lista-servicios')
+    return redirect('servicios:lista-servicios')
 
 
 
