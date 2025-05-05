@@ -37,7 +37,7 @@ def registro_cliente(request):
                 telefono=user_data['telefono'],
                 rol = 'cliente'
             )
-            return redirect('inicio-seccion')
+            return redirect('usuarios:inicio-seccion')
     else:
         form = CombinedUserClienteForm()
     
@@ -122,5 +122,5 @@ def ver_mis_citas(request):
         
         return render(request, 'clientes/ver_mis_citas.html', context=context)
     else:
-        return redirect('inicio-seccion')
+        return redirect('usuarios:inicio-seccion')
 

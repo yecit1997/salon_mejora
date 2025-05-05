@@ -28,7 +28,7 @@ def crear_cita(request, id):
                 enviar_correo(cliente, cita)
                 messages.success(request,'Cita creada con exito 😊')
                 
-                return redirect('lista-servicios')
+                return redirect('servicios:lista-servicios')
         else:
             form = citaForm()
             

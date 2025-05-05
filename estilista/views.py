@@ -28,7 +28,7 @@ def crear_estilista(request):
                 rol='estilista'
             )
             # login(request, user)
-            return redirect('lista-estilistas')
+            return redirect('estilista:lista-estilistas')
     else:
         estilista_form = EstilistaForm()
     
@@ -93,7 +93,7 @@ def editar_estilista(request, dni):
             # Guardar el estilista
             estilista_form.save()
 
-            return redirect('lista-estilistas')
+            return redirect('estilista:lista-estilistas')
     
     context = {
         'estilista_form': estilista_form
@@ -115,7 +115,7 @@ def ver_estilista(request, dni):
 def eliminar_estilista(request, dni):
     estilista = get_object_or_404(Estilista, dni=dni)
     estilista.delete()
-    return redirect('lista-estilistas')
+    return redirect('estilista:lista-estilistas')
 
 
 # Cambiar estado estilista
@@ -128,7 +128,7 @@ def cambiar_estado_estilista(request, dni):
         else:
             estilista.user.is_active = True
         estilista.user.save()
-        return redirect('lista-estilistas')
+        return redirect('estilista:lista-estilistas')
     
     context = {
         'estilista': estilista

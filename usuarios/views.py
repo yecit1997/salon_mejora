@@ -26,4 +26,4 @@ def cerrar_seccion(request):
     Definimos el cierre de la seccion y direccionamos al usuario nuevamente a la pagina de inicio de seccion
     '''
     logout(request)
-    return redirect('inicio-seccion')
+    return redirect('usuarios:inicio-seccion')
