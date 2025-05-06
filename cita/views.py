@@ -5,7 +5,6 @@ from core.paginador import paginador
 from cliente.models import Cliente
 from servicios.models import Servicio
 from .models import Cita
-from estilista.models import Estilista
 from .citaForm import citaForm
 from cita.correo_creacion_cita import enviar_correo
 

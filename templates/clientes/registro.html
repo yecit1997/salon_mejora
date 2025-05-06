@@ -6,16 +6,16 @@
 {% block title %}Registro estilista{% endblock title %}
     
 {% block content %}
-<div class="container mt-5">
-    <h2 class="text-center">Registro de Clientes</h2>
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card mt-5 mb-5">
+            <div class="card  bg-dark text-white rounded-3 p-5">
+                <h3 class="text-center text-info">Registro</h3>
                 <div class="card-body">
                     <form method="POST" class="my-class">
                         {% csrf_token %}
                         {{form|crispy}}
-                        <button type="submit" class="btn btn-primary d-block w-100">Registrar</button>
+                        <button type="submit" class="btn btn-primary d-block w-100 mt-5">Registrar</button>
                     </form>
                 </div>
             </div>

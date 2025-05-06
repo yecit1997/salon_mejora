@@ -56,6 +56,7 @@ LOCAL_APPS = [
     'servicios',
     'cita',
     'usuarios',
+    'balance',
 ]
 
 """
