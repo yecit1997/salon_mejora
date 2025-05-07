@@ -36,7 +36,7 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'listar-citas' %} active {% endif %}" href="{% url 'cita:listar-citas' %}">Balance</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'citas-mes' %} active {% endif %}" href="{% url 'balance:citas-mes' %}">Balance</a>
           </li>
         {% endif %}
       </ul>

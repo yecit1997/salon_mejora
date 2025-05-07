@@ -16,4 +16,9 @@ def citas_por_mes(request):
         print(mes, anio)
         if mes not in citas_por_mes:
             citas_por_mes[mes] = {}
-    return render(request, 'balance/citas_por_mes.html')
+        
+        context = {
+            'citas_por_mes': citas_por_mes,
+            'todas_las_citas': todas_las_citas,
+        }
+    return render(request, 'balance/citas_por_mes.html', context)
