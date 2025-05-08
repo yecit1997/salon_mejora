@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
+  <div class=" mt-5">
     {% comment %} <h2 class="text-center">Estilistas</h2> {% endcomment %}
     {% if user.is_superuser %}
       {% include 'components/botton_add.html' with directionUrl='estilista:crear-estilista' classIcon='bi bi-plus-lg' %}

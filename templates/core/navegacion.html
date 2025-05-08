@@ -17,7 +17,7 @@
         {% comment %}Creamos un enlace para que los clientes puedan visualizar las citas que tienen agendadas.{% endcomment %}
         {% if rol == 'cliente' %}
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'ver-mis-citas' %} active {% endif %}" aria-current="page" href="{% url 'ver-mis-citas' %}">Mis citas</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'ver-mis-citas' %} active {% endif %}" aria-current="page" href="{% url 'cliente:ver-mis-citas' %}">Mis citas</a>
           </li>
         {% endif %}
 
