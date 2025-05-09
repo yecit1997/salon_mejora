@@ -9,6 +9,9 @@ import base64
 
 from cita.models import Cita
 
+def balance_home(request):
+    return render(request, 'balance/balance_home.html')
+
 def citas_por_mes(request):
     todas_las_citas = Cita.objects.all()
     nombres_meses = [cita.fecha.strftime('%b') for cita in todas_las_citas]

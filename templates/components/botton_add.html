@@ -1,13 +1,15 @@
-{% comment %} 
+{% comment %}Creamos un boton tipo componente el cual nos permite reutilizar codigo en diferentes partes de la aplicacion, Adicional le ponemos pasar las clases boostrap que necesitemos en el momento, el boton se crea con una clase predeterminada la cual ubica el boton en la parte superior derecha, pero es totalmente modificable.
 
-Creamos un boton tipo componente el cual nos permite reutilizar codigo en diferentes partes de la aplicacion,
-Adicional le ponemos pasar las clases boostrap que necesitemos en el momento, el boton se crea con una clase predeterminada
-la cual ubica el boton en la parte superior derecha, pero es totalmente modificable.
-
-Tmbien le podemos indicar la URL a la cual queremos apuntar con este boton
-
-{% endcomment %}
+Tmbien le podemos indicar la URL a la cual queremos apuntar con este boton{% endcomment %}
 
 <div class="{{ classNameContainer }} | d-flex justify-content-end">
-    <a class="pt-1 pb-1 btn btn-outline-info btn-lg" href="{% url directionUrl %}" role="button">Add <i class="{{ classIcon }}"></i> </a>
+  {% if directionUrl %}
+    <a class="pt-1 pb-1 btn btn-outline-info btn-lg" href="{% url directionUrl %}" role="button">Add <i class="{{ classIcon }}"></i></a>
+  {% else %}
+    <span class="text-muted">Enlace no disponible</span>
+  {% endif %}
+
+  {% if classIcon %}
+
+  {% endif %}
 </div>

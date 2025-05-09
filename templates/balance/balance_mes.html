@@ -1,15 +1,14 @@
+
 {% extends 'core/base.html' %}
 
 {% load crispy_forms_tags %}
 {% load static %}
 
 {% block title %}
-  Balance
+    Balance mes
 {% endblock %}
 
 {% block content %}
-{% include 'balance/navegacion_balance.html' %}
-
 <div class="bg-dark text-white p-5 mb-4 d-flex flex-row w-100">
     <div class="row">
       {% comment %}Primera columna{% endcomment %}
@@ -31,25 +30,5 @@
         <img src="{{ grafico_porcentaje_meses }}" alt="Diagrama de Barras de Porcentaje de Citas por Mes" />
       </div>
     </div>
-
-    {% comment %}Segunda columna{% endcomment %}
-    <div class="row">
-      <div class="col-12 ms-5">
-        <h5 class="pb-5 text-info">Citas por día</h5>
-        <div class="d-flex flex-row">
-          <ul>
-            {% for dia, cantidad in conteo_dias.items %}
-              <li>Dia: {{ dia }} - Cantidad: {{ cantidad }}</li>
-            {% endfor %}
-          </ul>
-          <ul>
-            {% for _, porcentaje in porcentaje_por_dia.items %}
-              <li>{{ porcentaje }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        <img src="{{ grafico_porcentaje_dias }}" alt="Diagrama de Barras de Porcentaje de Citas por día" />
-      </div>
-    </div>
-  </div>
-{% endblock %}
+</div>
+{% endblock content %}
