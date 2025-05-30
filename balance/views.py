@@ -31,7 +31,7 @@ def citas_por_mes(request):
     porcentajes_meses = list(porcentaje_por_mes.values()) # Obtener los porcentajes en el orden correcto
     try:
         # Crear el gráfico de barras con matplotlib
-        plt.figure(figsize=(5, 3))
+        plt.figure(figsize=(8, 5))
         plt.bar(meses, porcentajes_meses, color='skyblue', width=0.5)
         plt.xlabel('Mes')
         plt.ylabel('Porcentaje (%)')
@@ -50,17 +50,38 @@ def citas_por_mes(request):
       print('Ocurrió un error al crear el gráfico.')
       
       
-    porcentaje_por_dia = {} # Inicializar el diccionario para almacenar los porcentajes
     
-    # Calcular el porcentaje de citas por día
-    for dia, cantidad in conteo_dias.items():
-        porcentaje_por_dia[dia] = round((cantidad / total_citas) * 100, 2)
+    
+    context = {
+        'conteo_meses': conteo_meses,
+        'conteo_dias': conteo_dias,
+        'total_citas': total_citas,
+        'porcentaje_por_mes': porcentaje_por_mes,
+        'grafico_porcentaje_meses': f'data:image/png;base64,{grafico_porcentaje_meses}',
+    }
+    return render(request, 'balance/citas_por_mes.html', context)
+
+
+def citas_por_dia(request):
+  todas_las_citas = Cita.objects.all()
+  nombres_meses = [cita.fecha.strftime('%b') for cita in todas_las_citas]
+  nombres_dias = [cita.fecha.strftime('%d') for cita in todas_las_citas]
+
+  conteo_meses = dict(Counter(nombres_meses))
+  conteo_dias = dict(Counter(nombres_dias))
+  total_citas = len(todas_las_citas)
+  
+  porcentaje_por_dia = {} # Inicializar el diccionario para almacenar los porcentajes
+    
+  # Calcular el porcentaje de citas por día
+  for dia, cantidad in conteo_dias.items():
+    porcentaje_por_dia[dia] = round((cantidad / total_citas) * 100, 2)
         
     dia = list(porcentaje_por_dia.keys()) # Obtener los días en el orden correcto
     porcentajes_dia = list(porcentaje_por_dia.values()) # Obtener los porcentajes en el orden correcto
     try:
       # Crear el gráfico de barras con matplotlib
-        plt.figure(figsize=(5, 3))
+        plt.figure(figsize=(8, 5))
         plt.bar(dia, porcentajes_dia, color='skyblue', width=0.5)
         plt.xlabel('dia')
         plt.ylabel('Porcentaje (%)')
@@ -78,14 +99,14 @@ def citas_por_mes(request):
     except:
       print('Ocurrió un error al crear el gráfico.')
     
-    context = {
+  context = {
         'conteo_meses': conteo_meses,
         'conteo_dias': conteo_dias,
         'total_citas': total_citas,
-        'porcentaje_por_mes': porcentaje_por_mes,
         'porcentaje_por_dia': porcentaje_por_dia,
-        'grafico_porcentaje_meses': f'data:image/png;base64,{grafico_porcentaje_meses}',
         'grafico_porcentaje_dias': f'data:image/png;base64,{grafico_porcentaje_dias}',
     }
-    return render(request, 'balance/citas_por_mes.html', context)
+  return render(request, 'balance/citas_por_dia.html', context)
+
+
 

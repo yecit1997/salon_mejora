@@ -1,3 +1,6 @@
-total = [i for i in range(0, 100, 2)]
+# total = [i for i in range(0, 100, 2)]
 
-print(total)
+# print(total)
+
+
+

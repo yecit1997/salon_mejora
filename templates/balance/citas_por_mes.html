@@ -8,48 +8,30 @@
 {% endblock %}
 
 {% block content %}
-{% include 'balance/navegacion_balance.html' %}
 
-<div class="bg-dark text-white p-5 mb-4 d-flex flex-row w-100">
-    <div class="row">
-      {% comment %}Primera columna{% endcomment %}
-      <div class="col-12">
-        <h5 class="pb-5 text-info">Total de citas: {{ total_citas }}</h5>
-        <h5 class="ps-3">Citas por mes</h5>
-        <div class="d-flex flex-row">
-          <ul>
-            {% for mes, conteo in conteo_meses.items %}
-              <li>{{ mes }}: {{ conteo }}</li>
-            {% endfor %}
-          </ul>
-          <ul>
-            {% for _, porcentaje in porcentaje_por_mes.items %}
-              <li>{{ porcentaje }}%</li>
-            {% endfor %}
-          </ul>
-        </div>
-        <img src="{{ grafico_porcentaje_meses }}" alt="Diagrama de Barras de Porcentaje de Citas por Mes" />
-      </div>
+  <h5 class="pb-3 text-info">Citas por mes</h5>
+  {% if grafico_porcentaje_meses %}
+    <img src="{{ grafico_porcentaje_meses }}" alt="Diagrama de Barras de Porcentaje de Citas por Día" class="img-fluid" />
+  {% else %}
+    <p class="text-muted">No hay datos de citas disponibles para generar el gráfico diario.</p>
+  {% endif %}
+
+  <div class="d-flex flex-row mt-3">
+    <div class="me-4">
+      <h6>Conteo por Día:</h6>
+      <ul class="list-unstyled">
+        {% for mes, conteo in conteo_meses.items %}
+          <li>{{ mes }}: {{ conteo }}</li>
+        {% endfor %}
+      </ul>
     </div>
-
-    {% comment %}Segunda columna{% endcomment %}
-    <div class="row">
-      <div class="col-12 ms-5">
-        <h5 class="pb-5 text-info">Citas por día</h5>
-        <div class="d-flex flex-row">
-          <ul>
-            {% for dia, cantidad in conteo_dias.items %}
-              <li>Dia: {{ dia }} - Cantidad: {{ cantidad }}</li>
-            {% endfor %}
-          </ul>
-          <ul>
-            {% for _, porcentaje in porcentaje_por_dia.items %}
-              <li>{{ porcentaje }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        <img src="{{ grafico_porcentaje_dias }}" alt="Diagrama de Barras de Porcentaje de Citas por día" />
-      </div>
+    <div>
+      <h6>Porcentaje por Día:</h6>
+      <ul class="list-unstyled">
+        {% for _, porcentaje in porcentaje_por_mes.items %}
+          <li>{{ porcentaje }}%</li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 {% endblock %}

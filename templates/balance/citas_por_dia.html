@@ -1,0 +1,29 @@
+{# balance/templates/balance/citas_por_dia_partial.html #}
+{% load static %}
+
+<h5 class="pb-3 text-info">Citas por Día</h5>
+{% if grafico_porcentaje_dias %}
+    <img src="{{ grafico_porcentaje_dias }}" alt="Diagrama de Barras de Porcentaje de Citas por Día" class="img-fluid" />
+{% else %}
+    <p class="text-muted">No hay datos de citas disponibles para generar el gráfico diario.</p>
+{% endif %}
+
+<div class="d-flex flex-row mt-3">
+    <div class="me-4">
+        <h6>Conteo por Día:</h6>
+        <ul class="list-unstyled">
+            {% for dia, cantidad in conteo_dias.items %}
+                <li>Día {{ dia }}: {{ cantidad }} citas</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h6>Porcentaje por Día:</h6>
+        <ul class="list-unstyled">
+            {% for dia, porcentaje in porcentaje_por_dia.items %}
+                <li>Día {{ dia }}: {{ porcentaje }}%</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<p class="text-muted mt-2">Total de citas procesadas: {{ total_citas }}</p>

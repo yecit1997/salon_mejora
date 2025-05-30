@@ -4,21 +4,47 @@
 {% load static %}
 
 {% block title %}
-    Balance
+  Balance
 {% endblock %}
 
 {% block content %}
+
+
     <div class="bg-dark text-white p-5 mb-4 d-flex flex-row w-100 align-items-center">
         <div class="d-flex flex-column me-5">
-            {% include 'components/card.html' with directionUrl='balance:citas-mes' titulo='Balance por mes' %}
-            {% include 'components/card.html' with titulo='Balance por dia' %}
-            {% include 'components/card.html' with titulo='Balance por hora' %}
-            {% include 'components/card.html' with titulo='Balance por estilista' %}
-            {% include 'components/card.html' with titulo='Balance por cliente' %}
-            {% include 'components/card.html' with titulo='Balance por servicio' %}
+            {# Incluimos tus tarjetas con los IDs de botón correctos #}
+            {# El data-url NO es necesario aquí, el JS lo obtendrá de las variables globales #}
+            {% include 'components/card.html' with titulo='Balance por Mes' id_boton='btn-mostrar-mes' %}
+            {% include 'components/card.html' with titulo='Balance por Día' id_boton='btn-mostrar-dia' %}
+            {% include 'components/card.html' with titulo='Balance por Hora' id_boton='btn-mostrar-hora' %}
+            {% include 'components/card.html' with titulo='Balance por Estilista' id_boton='btn-mostrar-estilista' %}
+            {% include 'components/card.html' with titulo='Balance por Cliente' id_boton='btn-mostrar-cliente' %}
+            {% include 'components/card.html' with titulo='Balance por Servicio' id_boton='btn-mostrar-servicio' %}
         </div>
         <div>
-            <h1 class="text-center ms-5 me-5 text-info">BALANCE ESTADISTICO</h1>
+            <div id="contenido-dinamico">
+                {# Este div se rellenará con el contenido HTML cargado por AJAX #}
+            </div>
+            <p class="text-muted">Selecciona una opción del menú de la izquierda para ver las estadísticas.</p>
         </div>
     </div>
-{% endblock %}
+
+    {# --- ¡PUNTO CLAVE! Pasa las URLs de Django a tu JavaScript aquí --- #}
+    <script>
+        
+        const urlsBalance = {
+            citasMesPartial: "{% url 'balance:citas-mes' %}",
+            citasDiaPartial: "{% url 'balance:citas-dia' %}",
+            
+        };
+    </script>
+    {# Carga tu archivo JavaScript externo DESPUÉS de definir las URLs. #}
+    <script src="{% static 'js/balance.js' %}"></script>
+
+
+{% endblock content %}
+
+
+
+
+   

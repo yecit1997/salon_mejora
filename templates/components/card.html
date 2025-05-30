@@ -1,4 +1,4 @@
-<div class="card mb-2" style="width: 18rem;">
+{% comment %} <div class="card mb-2" style="width: 18rem;">
   <div class="card-body">
       <h5 class="card-title"> {{titulo}} </h5>
       <h6 class="card-subtitle mb-2 text-body-secondary"> </h6>
@@ -8,5 +8,24 @@
       {% else %}
           <span class="text-muted">Enlace no disponible</span>
       {% endif %}
+      <button type="button" id="btn-mostrar-a">click</button>
   </div>
+</div> {% endcomment %}
+
+<div class="card mb-2" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ titulo }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+        <p class="card-text">Información estadística.</p>
+        
+        {# El 'id_boton' se pasa desde balance_home.html para identificar el botón #}
+        {% if id_boton %}
+            <button type="button" class="btn btn-primary" id="{{ id_boton }}">Ver detalles</button>
+        {% else %}
+            {# Si no se proporciona un id_boton, el botón puede estar deshabilitado o no tener funcionalidad #}
+            <button type="button" class="btn btn-secondary" disabled>Ver detalles</button>
+        {% endif %}
+    </div>
 </div>
+
+
