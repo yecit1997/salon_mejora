@@ -14,9 +14,9 @@
         <div class="d-flex flex-column me-5">
             {# Incluimos tus tarjetas con los IDs de botón correctos #}
             {# El data-url NO es necesario aquí, el JS lo obtendrá de las variables globales #}
-            {% include 'components/card.html' with titulo='Balance por Mes' id_boton='btn-mostrar-mes' %}
-            {% include 'components/card.html' with titulo='Balance por Día' id_boton='btn-mostrar-dia' %}
             {% include 'components/card.html' with titulo='Balance por Hora' id_boton='btn-mostrar-hora' %}
+            {% include 'components/card.html' with titulo='Balance por Día' id_boton='btn-mostrar-dia' %}
+            {% include 'components/card.html' with titulo='Balance por Mes' id_boton='btn-mostrar-mes' %}
             {% include 'components/card.html' with titulo='Balance por Estilista' id_boton='btn-mostrar-estilista' %}
             {% include 'components/card.html' with titulo='Balance por Cliente' id_boton='btn-mostrar-cliente' %}
             {% include 'components/card.html' with titulo='Balance por Servicio' id_boton='btn-mostrar-servicio' %}
@@ -35,7 +35,6 @@
         const urlsBalance = {
             citasMesPartial: "{% url 'balance:citas-mes' %}",
             citasDiaPartial: "{% url 'balance:citas-dia' %}",
-            
         };
     </script>
     {# Carga tu archivo JavaScript externo DESPUÉS de definir las URLs. #}
