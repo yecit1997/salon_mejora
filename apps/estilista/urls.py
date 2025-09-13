@@ -1,5 +1,5 @@
 from django.urls import path
-from estilista import views
+from apps.estilista import views
 
 app_name = 'estilista'
 

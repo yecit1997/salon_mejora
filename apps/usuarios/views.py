@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from usuarios.loginForm import LoginForm
+from apps.usuarios.loginForm import LoginForm
 
 def inicio_seccion(request):
     if request.method == 'POST':

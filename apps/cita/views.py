@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import  permission_required
 from django.contrib import messages
 from core.paginador import paginador
-from cliente.models import Cliente
-from servicios.models import Servicio
+from apps.cliente.models import Cliente
+from apps.servicios.models import Servicio
 from .models import Cita
 from .citaForm import citaForm
-from cita.correo_creacion_cita import enviar_correo
+from apps.cita.correo_creacion_cita import enviar_correo
 
 
 # Pedir una cita

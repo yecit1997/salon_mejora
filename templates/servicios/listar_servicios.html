@@ -64,9 +64,9 @@
             <h6 class="card-text">Precio: ${{ servicio.precio }}</h6>
           </div>
           <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'servicios:detalle-servicios' servicio.id %} " role="button">Detalle</a>
-            <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'cita:crear-cita' servicio.id %} " role="button">Citar</a>
-            <a class="btn btn-sm btn-dark btn-custom" href=" {% url 'servicios:editar-servicios' servicio.id %} " role="button">Editar</a>
+            <a class="btn btn-sm btn-warning btn-custom" href=" {% url 'servicios:detalle-servicios' servicio.id %} " role="button">Detalle</a>
+            <a class="btn btn-sm btn-success btn-custom" href=" {% url 'cita:crear-cita' servicio.id %} " role="button">Citar</a>
+            <a class="btn btn-sm btn-info btn-custom" href=" {% url 'servicios:editar-servicios' servicio.id %} " role="button">Editar</a>
           </div>
         </div>
       {% empty %}

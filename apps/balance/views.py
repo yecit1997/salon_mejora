@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import io
 import base64
 
-from cita.models import Cita
+from apps.cita.models import Cita
 
 def balance_home(request):
     return render(request, 'balance/balance_home.html')

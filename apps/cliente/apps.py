@@ -1,6 +1,9 @@
 from django.apps import AppConfig
 
 
-class CitaConfig(AppConfig):
+class ClienteConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'cita'
+    name = 'apps.cliente'
+    
+
+

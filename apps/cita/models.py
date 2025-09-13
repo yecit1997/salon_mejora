@@ -1,7 +1,7 @@
 from django.db import models
-from estilista.models import Estilista
-from cliente.models import Cliente
-from servicios.models import Servicio
+from apps.estilista.models import Estilista
+from apps.cliente.models import Cliente
+from apps.servicios.models import Servicio
 
 class Cita(models.Model):
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .estilistaForm import EstilistaForm
 from core.paginador import paginador
 from .models import Estilista
-from cita.models import Cita
+from apps.cita.models import Cita
 from django.db import models
 
 

@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class EstilistaConfig(AppConfig):
+class UsuariosConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'estilista'
-   
+    name = 'apps.usuarios'

@@ -1,5 +1,5 @@
 from django.urls import path
-from balance import views
+from apps.balance import views
 
 app_name = 'balance'
 

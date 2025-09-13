@@ -1,5 +1,5 @@
 from django.urls import path
-from cliente import views
+from apps.cliente import views
 
 app_name = 'cliente'
 

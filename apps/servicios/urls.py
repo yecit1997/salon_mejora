@@ -1,5 +1,5 @@
 from django.urls import path
-from servicios import views
+from apps.servicios import views
 
 app_name = 'servicios'
 

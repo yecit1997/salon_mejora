@@ -1,5 +1,5 @@
 from django.urls import path
-from cita import views
+from apps.cita import views
 
 app_name = 'cita'
 

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from core.paginador import paginador
 from .models import Cliente
-from cita.models import Cita
+from apps.cita.models import Cita
 from .clienteForm import CombinedUserClienteForm
 from django.contrib import messages
 

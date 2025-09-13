@@ -51,12 +51,12 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # APPS que creamos en el proyecto
 LOCAL_APPS = [
-    "estilista",
-    'cliente',
-    'servicios',
-    'cita',
-    'usuarios',
-    'balance',
+    "apps.estilista",
+    'apps.cliente',
+    'apps.servicios',
+    'apps.cita',
+    'apps.usuarios',
+    'apps.balance',
 ]
 
 """
@@ -90,8 +90,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'estilista.context_processors.rol_estilista',
-                'cliente.context_processors.rol_cliente',
+                'apps.estilista.context_processors.rol_estilista',
+                'apps.cliente.context_processors.rol_cliente',
             ],
         },
     },
