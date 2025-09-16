@@ -52,7 +52,7 @@
 </div>
 </div>
 
-{% include 'core/paginador.html' %}
+{% include 'core/paginador.html' with paginador=clientes %}
 <script src="{% static 'js/searchTable.js' %}"></script>
 {% endblock content %}
     

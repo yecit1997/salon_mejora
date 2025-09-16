@@ -57,16 +57,16 @@
     <div class="card-container pt-3">
       {% for servicio in servicios %}
         <div class="card">
-          <img src="{% static 'img/servicios/servicio.jpg' %}" class="card-img-top" alt="..." />
+          <img src="{{ servicio.imagen.url }}" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">{{ servicio.nombre }}</h5>
             <p class="card-text">{{ servicio.descripcion|truncatewords:10 }}</p>
             <h6 class="card-text">Precio: ${{ servicio.precio }}</h6>
           </div>
           <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-warning btn-custom" href=" {% url 'servicios:detalle-servicios' servicio.id %} " role="button">Detalle</a>
+            <a class="btn btn-sm btn-info btn-custom" href=" {% url 'servicios:detalle-servicios' servicio.id %} " role="button">Detalle</a>
             <a class="btn btn-sm btn-success btn-custom" href=" {% url 'cita:crear-cita' servicio.id %} " role="button">Citar</a>
-            <a class="btn btn-sm btn-info btn-custom" href=" {% url 'servicios:editar-servicios' servicio.id %} " role="button">Editar</a>
+            <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'servicios:editar-servicios' servicio.id %} " role="button">Editar</a>
           </div>
         </div>
       {% empty %}

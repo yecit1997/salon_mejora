@@ -5,7 +5,7 @@ class Servicio(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
     precio = models.FloatField()
-    # imagen = models.ImageField(upload_to="servicios", null=False, blank=False)
+    imagen = models.ImageField(upload_to="servicios", null=False, blank=False, default='servicios/default.jpg')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
