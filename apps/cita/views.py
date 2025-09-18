@@ -13,33 +13,38 @@ from apps.cita.correo_creacion_cita import enviar_correo
 # @permission_required(['cliente.puede_citar_cliente', 'auth.is_superuser'],login_url='inicio-seccion', raise_exception=True)
 def crear_cita(request, id):
     try:
-        servicio = get_object_or_404(Servicio, id=id) # Obtenemos el servicio que se ha seleccionado
-        cliente = get_object_or_404(Cliente, user=request.user) # Obtenemos el cliente que está logueado
+        servicio = get_object_or_404(Servicio, id=id)
         if request.method == 'POST':
-            form = citaForm(request.POST)
+            form = citaForm(request.POST, user=request.user) # Pasa el usuario al formulario
             if form.is_valid():
-                cita = form.save(commit=False) # Guardamos el formulario sin enviarlo a la base de datos
+                cita = form.save(commit=False)
                 cita.servicio = servicio
-                cita.cliente = cliente
-                cita.save() # Guardamos la cita en la base de datos
-                
-                # Enviar correo al cliete con los datos de la cita
-                enviar_correo(cliente, cita)
-                messages.success(request,'Cita creada con exito 😊')
-                
+
+                # Lógica para determinar el cliente
+                if request.user.is_superuser:
+                    # Si es administrador, usa el cliente seleccionado del formulario
+                    cita.cliente = form.cleaned_data['cliente']
+                else:
+                    # Si es un cliente normal, usa el cliente logueado
+                    cita.cliente = get_object_or_404(Cliente, user=request.user)
+                cita.creado_por = request.user
+
+                cita.save()
+                enviar_correo(cita.cliente, cita)
+                messages.success(request, 'Cita creada con éxito 😊')
                 return redirect('servicios:lista-servicios')
         else:
-            form = citaForm()
-            
+            form = citaForm(user=request.user)
+
         context = {
             'form': form,
-            'servicio':servicio,
-            'cliente':cliente
-            }
-        
+            'servicio': servicio,
+            'cliente': None # El cliente es dinámico, por lo que puede ser None
+        }
         return render(request, 'citas/pedir_cita.html', context=context)
-    except:
-      return render(request, 'core/sin_permisos.html')
+    except Exception as e:
+        messages.error(request, f'Ocurrió un error: {e}')
+        return render(request, 'core/sin_permisos.html')
     
 
 # Listamos las citas que tenemos en el sistema
@@ -50,6 +55,7 @@ def listar_citas(request):
         citas = paginador(citas,request)
         context = {
             'citas': citas,
+            # 'creado_por': creado_por,
         }
         
         return render(request, 'citas/listar_cita.html', context=context)

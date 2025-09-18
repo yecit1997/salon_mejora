@@ -37,8 +37,11 @@ def listar_servicios(request):
 @permission_required('auth.is_superuser', raise_exception=True)
 def editar_servicio(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
+    
     if request.method == 'POST':
-        form = servicioForm(request.POST, instance=servicio)
+        # La corrección está aquí: agrega request.FILES
+        form = servicioForm(request.POST, request.FILES, instance=servicio)
+        
         if form.is_valid():
             form.save()
             return redirect('servicios:lista-servicios')
@@ -48,7 +51,7 @@ def editar_servicio(request, pk):
     context = {
         'form': form
         }
-    return render(request, 'servicios/editar_servicio.html', context=context)    
+    return render(request, 'servicios/editar_servicio.html', context=context) 
 
 
 # Ver detalle

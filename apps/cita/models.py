@@ -2,11 +2,13 @@ from django.db import models
 from apps.estilista.models import Estilista
 from apps.cliente.models import Cliente
 from apps.servicios.models import Servicio
+from django.contrib.auth.models import User
 
 class Cita(models.Model):
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
     estilista = models.ForeignKey(Estilista, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    creado_por = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='citas_creadas')
     fecha = models.DateField()
     hora = models.TimeField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)

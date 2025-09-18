@@ -1,11 +1,13 @@
 from datetime import datetime, timedelta
 from django import forms
 from .models import Cita
+from apps.cliente.models import Cliente
 
 class citaForm(forms.ModelForm):
     class Meta:
         model = Cita
         fields = 'estilista, fecha, hora'.split(', ')
+        exclude = ['cliente']
         widgets = {
             # 'cliente': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'cliente'}),
             'fecha': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'fecha', 'type': 'date'}),
@@ -17,6 +19,19 @@ class citaForm(forms.ModelForm):
             'fecha': 'Fecha servicio',
             'hora': 'Hora servicio',
         }
+    
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None) # Obtiene el usuario de los argumentos
+        super(citaForm, self).__init__(*args, **kwargs)
+
+        # Si el usuario es un superusuario, añade un campo para seleccionar el cliente
+        if self.user and self.user.is_superuser:
+            self.fields['cliente'] = forms.ModelChoiceField(
+                queryset=Cliente.objects.all(),
+                required=True,
+                label='Cliente',
+                widget=forms.Select(attrs={'class': 'form-control'})
+            )
 
     def clean(self):
         cleaned_data = super().clean()
