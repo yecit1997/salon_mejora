@@ -54,7 +54,7 @@
     {% if user.is_superuser %}
       {% include 'components/botton_add.html' with directionUrl='servicios:crear-servicios' classIcon='bi bi-plus-lg' %}
     {% endif %}
-    <div class="card-container pt-3">
+    <div class="card-container pt-3 pb-3">
       {% for servicio in servicios %}
         <div class="card">
           <img src="{{ servicio.imagen.url }}" class="card-img-top" alt="..." />

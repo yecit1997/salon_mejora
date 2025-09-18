@@ -9,7 +9,7 @@
 
       {% if paginador.has_next %}
         <a class="text-black border-info" href="?page={{ paginador.next_page_number }}">siguiente</a>
-        <a class="text-black border-info" href="?page={{ paginador.paginator.num_pages }}">última &raquo;</a>
+        <a class="text-black border-info opacity-10" href="?page={{ paginador.paginator.num_pages }}">última &raquo;</a>
       {% endif %}
     </span>
   </div>
