@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from .estilistaForm import EstilistaForm
 from core.paginador import paginador
@@ -28,12 +29,13 @@ def crear_estilista(request):
                 rol='estilista'
             )
             # login(request, user)
+            messages.success(request, 'Estilista creado con éxito 😊')
             return redirect('estilista:lista-estilistas')
     else:
         estilista_form = EstilistaForm()
     
     context = {
-        'estilista_form': estilista_form
+        'estilista_form': estilista_form, # type: ignore
     }
     return render(request, 'estilistas/create_estilista.html', context)
 
@@ -92,7 +94,7 @@ def editar_estilista(request, dni):
 
             # Guardar el estilista
             estilista_form.save()
-
+            messages.success(request, 'Estilista actualizado con éxito 😊')
             return redirect('estilista:lista-estilistas')
     
     context = {
@@ -115,6 +117,7 @@ def ver_estilista(request, dni):
 def eliminar_estilista(request, dni):
     estilista = get_object_or_404(Estilista, dni=dni)
     estilista.delete()
+    messages.warning(request, 'El estilista fue eliminado con éxito ❌')
     return redirect('estilista:lista-estilistas')
 
 
@@ -128,6 +131,7 @@ def cambiar_estado_estilista(request, dni):
         else:
             estilista.user.is_active = True
         estilista.user.save()
+        messages.success(request, 'Estado del estilista actualizado con éxito 😊')
         return redirect('estilista:lista-estilistas')
     
     context = {

@@ -37,6 +37,7 @@ def registro_cliente(request):
                 telefono=user_data['telefono'],
                 rol = 'cliente'
             )
+            messages.success(request, 'Cliente registrado con éxito 😊')
             return redirect('usuarios:inicio-seccion')
     else:
         form = CombinedUserClienteForm()
@@ -93,7 +94,7 @@ def editar_cliente(request, dni):
 
             # Guardar el estilista
             form.save()
-
+            messages.success(request, 'Cliente actualizado con éxito 😊')
             return redirect('cliente:listar-cliente')
     
     context = {
@@ -106,6 +107,7 @@ def editar_cliente(request, dni):
 def eliminar_cliente(request, dni):
     cliente = get_object_or_404(Cliente, dni=dni)
     cliente.delete()
+    messages.warning(request, 'El cliente fue eliminado con exito ❌')
     return redirect('cliente:listar-cliente')
 
 

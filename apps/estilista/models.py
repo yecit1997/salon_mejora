@@ -12,7 +12,7 @@ class Estilista(models.Model):
     rol = models.CharField(max_length=30, default='estilistas')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
-
+    
     class Meta:
         verbose_name = "estilista"
         verbose_name_plural = "estilistas"

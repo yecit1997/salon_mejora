@@ -9,6 +9,8 @@ class EstilistaForm(forms.ModelForm):
     last_name = forms.CharField(max_length=30)
     dni = forms.CharField(max_length=10)
     telefono = forms.CharField(max_length=20)
+    
+    
 
     class Meta:
         model = Estilista
@@ -18,3 +20,4 @@ class EstilistaForm(forms.ModelForm):
         super(EstilistaForm, self).__init__(*args, **kwargs)
         if self.instance.pk:
             self.fields.pop('password')
+            

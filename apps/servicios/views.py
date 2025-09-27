@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 
 from .models import Servicio
 from .serviciosForm import servicioForm
@@ -12,6 +13,7 @@ def crear_servicios(request):
         form = servicioForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Servicio creado con éxito 😊')
             return redirect('servicios:lista-servicios')
     else:
         form = servicioForm()
@@ -44,6 +46,7 @@ def editar_servicio(request, pk):
         
         if form.is_valid():
             form.save()
+            messages.success(request, 'Servicio actualizado con éxito 😊')
             return redirect('servicios:lista-servicios')
     else:
         form = servicioForm(instance=servicio)
@@ -69,7 +72,7 @@ def detelle_servicio(request, pk):
 def eliminar_servicio(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
     servicio.delete()
-    
+    messages.warning(request, 'El servicio fue eliminado con éxito ❌')
     return redirect('servicios:lista-servicios')
 
 
