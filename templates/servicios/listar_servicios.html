@@ -3,76 +3,202 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block title %}
-  Lista de Citas
-{% endblock %}
+{% block title %}Servicios - Salón de Belleza{% endblock %}
+
+{% block meta_description %}Descubre nuestros servicios profesionales de belleza y cuidado personal. Cortes, coloración, tratamientos y más.{% endblock %}
+
+{% block keywords %}servicios, belleza, corte, coloración, tratamientos, manicure, pedicure{% endblock %}
 
 {% block styles %}
-  <style>
-    .card-img-top {
-      height: 200px;
-      object-fit: cover;
-    }
-    
-    .card {
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
-    }
-    
-    .card:hover {
-      transform: scale(1.05);
-    }
-    
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    
-    .btn-custom {
-      border-radius: 20px;
-      margin-top: 5px;
-    }
-    
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    
-    @media (max-width: 767px) {
-      .card-container {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link href="{% static 'css/servicios.css' %}" rel="stylesheet"/>
 {% endblock %}
 
 {% block content %}
-  <div class="container mb-5 mt-5">
-    {% if user.is_superuser %}
-      {% include 'components/botton_add.html' with directionUrl='servicios:crear-servicios' classIcon='bi bi-plus-lg' %}
-    {% endif %}
-    <div class="card-container pt-3 pb-3">
-      {% for servicio in servicios %}
-        <div class="card">
-          <img src="{{ servicio.imagen.url }}" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">{{ servicio.nombre }}</h5>
-            <p class="card-text">{{ servicio.descripcion|truncatewords:10 }}</p>
-            <h6 class="card-text">Precio: ${{ servicio.precio }}</h6>
-          </div>
-          <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-info btn-custom" href=" {% url 'servicios:detalle-servicios' servicio.id %} " role="button">Detalle</a>
-            <a class="btn btn-sm btn-success btn-custom" href=" {% url 'cita:crear-cita' servicio.id %} " role="button">Citar</a>
-            <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'servicios:editar-servicios' servicio.id %} " role="button">Editar</a>
-          </div>
-        </div>
-      {% empty %}
-        <p>No hay productos disponibles.</p>
-      {% endfor %}
+<div class="container-fluid px-3">
+  <!-- Header de Servicios -->
+  <div class="services-header">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h1><i class="bi bi-scissors me-3"></i>Nuestros Servicios</h1>
+        <p>Descubre nuestra amplia gama de servicios profesionales de belleza y cuidado personal, diseñados para realzar tu belleza natural.</p>
+      </div>
+      <div class="col-md-4 text-md-end">
+        {% if user.is_superuser %}
+          <a href="{% url 'servicios:crear-servicios' %}" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-lg me-2"></i>Agregar Servicio
+          </a>
+        {% endif %}
+      </div>
     </div>
   </div>
-  {% include 'core/paginador.html' with paginador=servicios %}
+
+  <!-- Filtros y Búsqueda -->
+  <div class="filters-section">
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <div class="search-input">
+          <i class="bi bi-search search-icon"></i>
+          <input type="text" class="form-control" id="searchInput" placeholder="Buscar servicios...">
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <select class="form-select" id="categoryFilter">
+          <option value="">Todas las categorías</option>
+          <option value="corte">Corte</option>
+          <option value="coloracion">Coloración</option>
+          <option value="tratamiento">Tratamiento</option>
+          <option value="manicure">Manicure</option>
+          <option value="pedicure">Pedicure</option>
+        </select>
+      </div>
+      <div class="col-md-2 mb-3">
+        <input type="number" class="form-control" id="minPrice" placeholder="Precio mínimo" min="0">
+      </div>
+      <div class="col-md-2 mb-3">
+        <input type="number" class="form-control" id="maxPrice" placeholder="Precio máximo" min="0">
+      </div>
+      <div class="col-md-2 mb-3">
+        <select class="form-select" id="sortBy">
+          <option value="nombre">Ordenar por nombre</option>
+          <option value="precio_asc">Precio: menor a mayor</option>
+          <option value="precio_desc">Precio: mayor a menor</option>
+          <option value="duracion">Duración</option>
+        </select>
+      </div>
+      <div class="col-md-1 mb-3">
+        <button class="btn btn-outline-secondary w-100" id="clearFilters">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contador de resultados y vista -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="results-count">
+      <i class="bi bi-grid-3x3-gap me-2"></i>
+      <span id="resultsCount">{{ servicios|length }}</span> servicios encontrados
+    </div>
+    <div class="view-toggle">
+      <button class="btn btn-outline-primary active" id="gridView" data-view="grid">
+        <i class="bi bi-grid-3x3-gap"></i>
+      </button>
+      <button class="btn btn-outline-primary" id="listView" data-view="list">
+        <i class="bi bi-list-ul"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Grid de Servicios -->
+  <div class="row" id="servicesGrid">
+    {% for servicio in servicios %}
+      <div class="col-lg-4 col-md-6 mb-4 service-item" data-category="{{ servicio.categoria }}" data-price="{{ servicio.precio }}" data-name="{{ servicio.nombre|lower }}">
+        <div class="service-card card h-100 position-relative">
+          {% if servicio.destacado %}
+            <div class="featured-badge">
+              <i class="bi bi-star-fill me-1"></i>Destacado
+            </div>
+          {% endif %}
+          
+          {% if servicio.imagen %}
+            <img src="{{ servicio.imagen.url }}" class="card-img-top" alt="{{ servicio.nombre }}">
+          {% else %}
+            <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
+              <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+            </div>
+          {% endif %}
+          
+          <div class="card-body">
+            <div class="service-category">{{ servicio.get_categoria_display }}</div>
+            <h5 class="card-title">{{ servicio.nombre }}</h5>
+            <p class="card-text">{{ servicio.descripcion|truncatewords:15 }}</p>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="service-price">${{ servicio.precio|floatformat:0 }}</div>
+              <div class="service-duration">
+                <i class="bi bi-clock me-1"></i>{{ servicio.duracion }} min
+              </div>
+            </div>
+            
+            <div class="service-actions">
+              <a href="{% url 'servicios:detalle-servicios' servicio.id %}" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-eye me-1"></i>Ver Detalles
+              </a>
+              <a href="{% url 'cita:crear-cita' servicio.id %}" class="btn btn-success btn-sm">
+                <i class="bi bi-calendar-plus me-1"></i>Reservar
+              </a>
+              {% if user.is_superuser %}
+                <a href="{% url 'servicios:editar-servicios' servicio.id %}" class="btn btn-outline-secondary btn-sm">
+                  <i class="bi bi-pencil me-1"></i>Editar
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="no-results">
+          <i class="bi bi-search"></i>
+          <h3>No se encontraron servicios</h3>
+          <p>No hay servicios disponibles en este momento. Intenta ajustar los filtros de búsqueda.</p>
+          <button class="btn btn-primary" id="clearFiltersBtn">
+            <i class="bi bi-arrow-clockwise me-2"></i>Limpiar Filtros
+          </button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Paginación -->
+  {% if servicios.has_other_pages %}
+    <div class="pagination-wrapper">
+      <nav aria-label="Navegación de servicios">
+        <ul class="pagination">
+          {% if servicios.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page=1" aria-label="Primera">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ servicios.previous_page_number }}" aria-label="Anterior">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          {% endif %}
+
+          {% for num in servicios.paginator.page_range %}
+            {% if servicios.number == num %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+              </li>
+            {% elif num > servicios.number|add:'-3' and num < servicios.number|add:'3' %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+
+          {% if servicios.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ servicios.next_page_number }}" aria-label="Siguiente">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ servicios.paginator.num_pages }}" aria-label="Última">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/servicios.js' %}"></script>
 {% endblock %}
